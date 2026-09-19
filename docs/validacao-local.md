@@ -22,3 +22,8 @@ Advisory de revisão Endor recebido. Busca de ferramentas não encontrou depende
 ## Estado final
 
 Código validado offline. Convergência mantém pendência externa de notas >=0.8, 3–5 iterações, dashboard e três traces. Não foram publicadas transcrições ou credenciais.
+
+## Revisão independente e correção — 2026-09-19
+R294-01: o juiz podia responder `{}` e os defaults do starter viravam zero; 14 notas0,9 diluíam a falha numa média0,84 aprovada. Solução em strict_metrics.py preserva bytecode/prompts/fórmulas e usa globals privados para injetar parser estrito antes dos defaults, sem monkey patch no módulo compartilhado.
+
+`rtk proxy .venv/bin/python -m pytest -q`: **54 passed in 0.30s**. Casos novos: objetos incompletos, campos faltantes, tipos inválidos, não finitos, zero legítimo e fórmula F1 original. Revisão independente reproduziu rejeição de `{}`/reasoning-only, três métricas concorrentes sem interferência e quatro hashes congelados intactos. Nenhuma API real foi chamada.

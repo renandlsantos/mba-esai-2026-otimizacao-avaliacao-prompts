@@ -39,3 +39,11 @@ MVP: pull sem perda de dados. Depois v2 e push com testes. Por último evidênci
 ### Revisão de convergência em 2026-09-19
 
 7 requisitos funcionais, 4 critérios de sucesso, 6 cenários de aceite, decisões do plano e 5 princípios constitucionais revisados. Um achado HIGH/partial: falta evidência externa de avaliação. Nenhuma violação dos arquivos congelados. Código e testes offline completos; entrega acadêmica não declarada concluída. T010/T014 dependem de credenciais, não de implementação pendente.
+
+## Phase 8: Correção da revisão independente
+
+- [X] T015 [US3] Rejeitar schema incompleto do juiz antes dos defaults das métricas congeladas em src/strict_metrics.py; regressão em tests/test_strict_metrics.py; preservar fórmulas/prompts e hashes originais.
+
+Achado reproduzido: `{}` vira zero nas métricas originais e pode ser diluído por 14 notas válidas. Plano revisado: executar mesmas funções congeladas com parser estrito isolado, sem mutar módulo global, prompts, fórmulas ou arquivo original. Validar precision/recall/reasoning no F1 e score/reasoning nas demais antes do cálculo.
+
+Convergência após T015: achado R294-01 resolvido e revisado independentemente; permanecem apenas T010/T014 de evidência externa.

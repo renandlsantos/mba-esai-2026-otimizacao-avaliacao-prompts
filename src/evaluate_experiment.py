@@ -14,7 +14,7 @@ from pathlib import Path
 from langchain import hub
 from langsmith import Client
 from langsmith.evaluation import evaluate
-from metrics import evaluate_f1_score, evaluate_clarity, evaluate_precision
+from strict_metrics import evaluate_f1_score, evaluate_clarity, evaluate_precision
 from utils import check_env_vars, get_llm
 
 ROOT = Path(__file__).resolve().parents[1]

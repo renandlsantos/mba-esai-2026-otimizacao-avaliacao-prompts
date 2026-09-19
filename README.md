@@ -114,3 +114,6 @@ e 16730 (pull e controle de versão), disciplina Prompt Engineering. A síntese 
 [research.md](specs/001-optimize-prompts/research.md); nenhuma transcrição privada foi publicada.
 API consultada: [documentação oficial do LangSmith](https://docs.langchain.com/langsmith/manage-prompts-programmatically).
 A implementação verifica as assinaturas da versão fixada pelo upstream, que difere da documentação mais recente.
+
+### Correção após revisão independente
+O runner complementar valida agora o JSON bruto do juiz em `src/strict_metrics.py` antes dos defaults das métricas originais. `{}` ou uma resposta sem nota/justificativa interrompe a avaliação, em vez de virar zero e ser diluída na média. A nota zero completa continua válida. Os prompts e fórmulas congelados são executados com um parser isolado por chamada; `metrics.py` e os demais arquivos protegidos permanecem intactos. Foram adicionadas 19 regressões; suíte atual: 54 testes offline. Validação concorrente independente confirmou que os parsers não interferem entre métricas.
