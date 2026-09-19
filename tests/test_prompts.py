@@ -1,45 +1,32 @@
-"""
-Testes automatizados para validação de prompts.
-"""
-import pytest
-import yaml
-import sys
+"""Seis critérios acadêmicos para a versão otimizada."""
 from pathlib import Path
+import yaml
+import re
 
-# Adicionar src ao path
-sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
+ROOT = Path(__file__).resolve().parents[1]
 
-from utils import validate_prompt_structure
+def prompt():
+    return yaml.safe_load((ROOT / 'prompts/bug_to_user_story_v2.yml').read_text())['bug_to_user_story_v2']
 
-def load_prompts(file_path: str):
-    """Carrega prompts do arquivo YAML."""
-    with open(file_path, 'r', encoding='utf-8') as f:
-        return yaml.safe_load(f)
+def test_prompt_has_system_prompt():
+    assert prompt()['system_prompt'].strip()
 
-class TestPrompts:
-    def test_prompt_has_system_prompt(self):
-        """Verifica se o campo 'system_prompt' existe e não está vazio."""
-        pass
+def test_prompt_has_role_definition():
+    assert 'Você é um Product Manager' in prompt()['system_prompt']
 
-    def test_prompt_has_role_definition(self):
-        """Verifica se o prompt define uma persona (ex: "Você é um Product Manager")."""
-        pass
+def test_prompt_mentions_format():
+    assert 'Markdown' in prompt()['system_prompt']
+    assert 'Como' in prompt()['system_prompt'] and 'quero' in prompt()['system_prompt']
 
-    def test_prompt_mentions_format(self):
-        """Verifica se o prompt exige formato Markdown ou User Story padrão."""
-        pass
+def test_prompt_has_few_shot_examples():
+    text = prompt()['system_prompt']
+    assert text.count('Entrada:') >= 3
+    assert text.count('Saída:') >= 3
 
-    def test_prompt_has_few_shot_examples(self):
-        """Verifica se o prompt contém exemplos de entrada/saída (técnica Few-shot)."""
-        pass
+def test_prompt_no_todos():
+    assert not re.search(r'\bTODO\b', str(prompt()), re.IGNORECASE)
 
-    def test_prompt_no_todos(self):
-        """Garante que você não esqueceu nenhum `[TODO]` no texto."""
-        pass
-
-    def test_minimum_techniques(self):
-        """Verifica (através dos metadados do yaml) se pelo menos 2 técnicas foram listadas."""
-        pass
-
-if __name__ == "__main__":
-    pytest.main([__file__, "-v", "--tb=short"])
+def test_minimum_techniques():
+    techniques = prompt()['techniques_applied']
+    assert len(set(techniques)) >= 2
+    assert 'few-shot' in techniques
