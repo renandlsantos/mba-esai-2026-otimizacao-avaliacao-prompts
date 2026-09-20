@@ -106,7 +106,7 @@ def test_import_never_imports_frozen_module():
     assert result.returncode == 0 and "dotenv" not in result.stderr
 
 
-@pytest.mark.parametrize("mutation", ["boolean", "nan", "missing", "duplicate", "too_many", "runner_hash"])
+@pytest.mark.parametrize("mutation", ["boolean", "nan", "missing", "duplicate", "too_many", "runner_hash", "judge"])
 def test_resume_rejects_invalid_checkpoint(tmp_path, tracing, mutation):
     client = FakeClient()
     path = tmp_path / "report.json"
@@ -119,6 +119,7 @@ def test_resume_rejects_invalid_checkpoint(tmp_path, tracing, mutation):
     elif mutation == "duplicate": data["examples"].append(data["examples"][0].copy())
     elif mutation == "too_many": data["examples"] *= 16
     elif mutation == "runner_hash": data["metadata"]["runner_sha256"] = "different"
+    elif mutation == "judge": data["metadata"]["judge"] = "spark/fast"
     path.write_text(json.dumps(data))
     with pytest.raises(runner.EvaluationError):
         runner.run_experiment(client, FakeModel(), FakeModel(), resume=True, **args)
@@ -167,3 +168,17 @@ def test_runner_upgrade_requires_proven_previous_source(tmp_path, tracing):
     result = runner.run_experiment(client, FakeModel(), FakeModel(), resume=True, adopt_upgrade=True, limit=1, **args)
     assert result["runner_upgrades"][0]["previous_runner_sha256"] == old_hash
     assert path.with_name(path.stem + ".before-" + old_hash[:12] + ".json").exists()
+
+
+def test_cli_defaults_to_same_author_selected_spark_model(monkeypatch, tmp_path):
+    monkeypatch.setattr(sys, "argv", ["evaluate_langsmith_spark", "--version", "v1", "--output", str(tmp_path / "report.json")])
+    monkeypatch.setattr(runner, "dotenv_values", lambda *args, **kwargs: {
+        "LANGSMITH_ENDPOINT": "https://test.invalid", "LANGSMITH_API_KEY": "test-only",
+        "LANGSMITH_PROJECT": "test", "SPARK_BASE_URL": "https://test.invalid/v1", "SPARK_API_KEY": "test-only"})
+    monkeypatch.setattr(runner, "Client", lambda **kwargs: object())
+    monkeypatch.setattr(runner, "OpenAI", lambda **kwargs: object())
+    def execute(client, generator, judge, **kwargs):
+        assert generator.model == judge.model == "spark/code"
+        return {"complete": False, "dashboard_url": "https://test.invalid/report"}
+    monkeypatch.setattr(runner, "run_experiment", execute)
+    assert runner.main() == 0

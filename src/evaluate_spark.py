@@ -155,7 +155,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--version", choices=["v1", "v2"], required=True)
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--judge", choices=["spark/fast", "spark/code"], default="spark/fast")
+    parser.add_argument("--judge", choices=["spark/code", "spark/fast"], default="spark/code")
     parser.add_argument("--credentials", type=Path, default=Path.home() / ".config/spark/spark-api.env")
     parser.add_argument("--limit", type=int, default=15)
     parser.add_argument("--resume", action="store_true")

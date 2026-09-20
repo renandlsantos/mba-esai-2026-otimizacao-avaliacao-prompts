@@ -1,12 +1,12 @@
 # MBA ESAI 2026 — Otimização e avaliação de prompts
 
-**Preferência do autor:** modelos locais no Spark. Geração com `spark/code` e avaliação com `spark/fast`. LangSmith está conectado para registrar experimentos, feedbacks e traces reais.
+**Preferência do autor:** modelos locais no Spark. Geração e avaliação com `spark/code` (modelo de resposta direta, escolhido para reduzir latência e consumo do orçamento de saída). LangSmith está conectado para registrar experimentos, feedbacks e traces reais.
 
 
 Implementação da fase 294 do MBA Full Cycle, baseada no [repositório acadêmico](https://github.com/devfullcycle/mba-ia-pull-evaluation-prompt).
 Transforma relatos de bugs em User Stories, versiona prompts no LangSmith e avalia cinco métricas.
 
-**Estado: código implementado, Hub v2 público e avaliação integral Spark + LangSmith em execução; aprovação acadêmica ainda não declarada.**
+**Estado: código implementado, Hub v2 público e avaliação integral Spark + LangSmith pausada por solicitação do autor; fase 294 pendente, sem merge ou submissão.**
 Nenhuma nota, publicação no LangSmith ou screenshot de avaliação foi fabricada.
 
 ## Processo SDD
@@ -87,7 +87,7 @@ pelo menos três traces. Faça entre três e cinco iterações registrando o mot
 
 ## Resultados Finais
 
-**Comparação integral LangSmith em execução.** Já existem traces e notas reais; a tabela final só será preenchida após os 15 exemplos de cada versão e conferência remota. A amostra Spark local anterior está documentada separadamente.
+**Comparação integral LangSmith pausada e incompleta.** Já existem traces e notas reais; a tabela final só será preenchida após os 15 exemplos de cada versão e conferência remota. A amostra Spark local anterior está documentada separadamente.
 
 | Métrica | v1 | v2 | Critério |
 |---|---|---|---|
@@ -123,7 +123,14 @@ O runner complementar valida agora o JSON bruto do juiz em `src/strict_metrics.p
 
 ## Avaliação complementar local com Spark
 
-O runner `src/evaluate_spark.py` executa sequencialmente os 15 exemplos congelados para uma versão. Usa `spark/code` para gerar e `spark/fast` para julgar, temperatura 0, 4096 tokens e timeout de 300 s, sem retries automáticos. Lê exclusivamente `~/.config/spark/spark-api.env` via python-dotenv sem interpolação de variáveis (`SPARK_BASE_URL`/`SPARK_API_KEY`, ou aliases `OPENAI_BASE_URL`/`OPENAI_API_KEY`). Não imprime configuração, requests, exceções do provedor ou `reasoning_content`.
+O runner `src/evaluate_spark.py` executa sequencialmente os 15 exemplos congelados para uma versão. Usa `spark/code` para gerar e julgar, temperatura 0, 4096 tokens e timeout de 300 s, sem retries automáticos. Lê exclusivamente `~/.config/spark/spark-api.env` via python-dotenv sem interpolação de variáveis (`SPARK_BASE_URL`/`SPARK_API_KEY`, ou aliases `OPENAI_BASE_URL`/`OPENAI_API_KEY`). Não imprime configuração, requests, exceções do provedor ou `reasoning_content`.
+
+> **Troca do juiz (2026-09-20).** O juiz era `spark/fast`, que produz raciocínio intermediário antes da resposta: em um
+> caso simples, segundo a medição fornecida pelo autor, gastou 2148 dos 4096 tokens (7267 caracteres de raciocínio), o que arrisca `finish_reason=length` e derruba
+> a execução. `spark/code` responde direto. Medição lado a lado no mesmo caso (as três métricas): **12,0 s contra 88,2 s**,
+> e, nessa amostra fornecida pelo autor, notas mais severas — f1 0,800 vs 0,857 · clarity 0,850 vs 0,910 · precision 0,830 vs 0,970.
+> **Consequência metodológica:** resultados medidos com o juiz anterior não são comparáveis com os novos; para comparar
+> versões de prompt, reexecute todas elas com o mesmo juiz.
 
 ```bash
 .venv/bin/python src/evaluate_spark.py --version v1 --output results/spark-v1.json
@@ -140,7 +147,7 @@ O caminho de credenciais pode ser alterado explicitamente com `--credentials /ca
 
 ### Amostra real de 20/09/2026
 
-Foram executados 3 de 15 exemplos por versão, com `spark/code` e juiz `spark/fast`; os seis casos tiveram JSON válido nas três métricas. A comparação continua incompleta, sem média nem aprovação. Veja [notas por exemplo e limites da evidência](docs/spark-sample-2026-09-20.md). Suíte naquela etapa: 69 testes offline, incluindo clone limpo.
+Foram executados 3 de 15 exemplos por versão, com `spark/code` e juiz `spark/fast` (o juiz passou a ser `spark/code` em 2026-09-20); os seis casos tiveram JSON válido nas três métricas. A comparação continua incompleta, sem média nem aprovação. Veja [notas por exemplo e limites da evidência](docs/spark-sample-2026-09-20.md). Suíte naquela etapa: 69 testes offline, incluindo clone limpo.
 
 
 [Configuração e execução LangSmith mantendo modelos Spark](docs/configurar-langsmith.md).
@@ -148,3 +155,9 @@ Foram executados 3 de 15 exemplos por versão, com `spark/code` e juiz `spark/fa
 ## Integração real Spark + LangSmith
 
 O runner `src/evaluate_langsmith_spark.py` cria experimentos com o dataset congelado, traces reais da geração e dos três julgamentos e cinco feedbacks por exemplo. Reutiliza `score_answer`, verifica os resultados remotos e suporta retomada estrita. A [documentação de execução](docs/configurar-langsmith.md) explica os arquivos de configuração, o dataset compartilhado e os links: os experimentos ficam separados do projeto-base `MBA-ESAI`. O prompt v2 já está público no handle `renandlsantos`, commit `332d800a16061a89ba3c9f897c3b7ef353aca9822efd77a179f2098f0f88ed56`.
+
+Temperatura 0 não garante determinismo absoluto, e o limite de 4096 tokens ainda permite respostas truncadas, que o runner rejeita. Usar o mesmo modelo como gerador e juiz pode introduzir preferência pelas próprias respostas; não houve calibração humana do juiz. A escolha `spark/code` em ambos os papéis é explícita do autor.
+
+## Pausa e entrega pendente
+
+A pedido do autor, a fase 294 fica pendente enquanto os demais projetos são submetidos. Foram preservados 4/15 casos v1 com juiz `spark/fast` e, em um experimento separado, 3/15 com juiz `spark/code`. O quarto caso do novo grupo foi rejeitado por JSON inválido; v2 integral ainda não foi executada. O teste pontual de JSON mode passou, mas essa opção ainda não foi implementada nos runners. Veja [estado, evidências e retomada](docs/evidence/langsmith/status-pendente-2026-09-20.md). Suíte atual: 86 testes offline.

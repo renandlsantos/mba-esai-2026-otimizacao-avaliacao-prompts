@@ -245,7 +245,7 @@ def main():
         client = Client(api_url=ls["LANGSMITH_ENDPOINT"], api_key=ls["LANGSMITH_API_KEY"], auto_batch_tracing=False)
         provider = OpenAI(base_url=spark.get("SPARK_BASE_URL") or spark["OPENAI_BASE_URL"],
                           api_key=spark.get("SPARK_API_KEY") or spark["OPENAI_API_KEY"], timeout=300, max_retries=0)
-        report = run_experiment(client, SparkModel(provider, "spark/code"), SparkModel(provider, "spark/fast"),
+        report = run_experiment(client, SparkModel(provider, "spark/code"), SparkModel(provider, "spark/code"),
                                 version=args.version, output=args.output, base_project=ls["LANGSMITH_PROJECT"],
                                 prompt_ref=args.prompt_ref or (V1_REF if args.version == "v1" else None),
                                 limit=args.limit, resume=args.resume, dataset_id=args.dataset_id, adopt_legacy=args.adopt_legacy_checkpoint, adopt_upgrade=args.adopt_runner_upgrade)

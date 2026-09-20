@@ -120,5 +120,8 @@ def test_main_exit_code_and_no_credential_interpolation(monkeypatch, tmp_path, c
         return {"SPARK_BASE_URL": "http://test.invalid/v1", "SPARK_API_KEY": "test-only"}
     monkeypatch.setattr(spark, "dotenv_values", config)
     monkeypatch.setattr(spark, "OpenAI", lambda **kwargs: object())
-    monkeypatch.setattr(spark, "evaluate_version", lambda *args: {"complete": complete, "passed_local_threshold": passed})
+    def evaluate(*args):
+        assert args[1].model == "spark/code" and args[2].model == "spark/code"
+        return {"complete": complete, "passed_local_threshold": passed}
+    monkeypatch.setattr(spark, "evaluate_version", evaluate)
     assert spark.main() == expected

@@ -6,7 +6,7 @@ O prompt v1 foi consultado no Hub e seu commit `2950c33dbd7ffaed2e440b50adfd7769
 
 A amostra local anterior (3 casos por versão) não tinha LangSmith. A rodada atual usa **chamadas reais Spark com traces e feedbacks reais no LangSmith**. Os experimentos estão separados do projeto-base `MBA-ESAI`; o dataset contém os 15 exemplos originais. Os links e a configuração estão em [configurar-langsmith.md](configurar-langsmith.md).
 
-A avaliação integral está em andamento. O material já exportado fica em [evidence/langsmith/README.md](evidence/langsmith/README.md). Arquivos JSON não substituem automaticamente os screenshots solicitados no enunciado; capturas parciais precisam estar identificadas como parciais.
+A avaliação integral está pausada a pedido do autor; a fase 294 não será submetida nesta rodada. O material já exportado fica em [evidence/langsmith/README.md](evidence/langsmith/README.md). Arquivos JSON não substituem automaticamente os screenshots solicitados no enunciado; capturas parciais precisam estar identificadas como parciais.
 
 ## Critérios da entrega
 
@@ -24,7 +24,7 @@ A avaliação integral está em andamento. O material já exportado fica em [evi
 | Construção v2 | Few-shot, persona, estrutura Markdown e regras de lacunas | Testes de contrato e conteúdo | Implementação do prompt |
 | Amostra Spark local | Nenhuma alteração adicional | 3 casos por versão, sem LangSmith | Exploratória, incompleta |
 | Hub e smoke LangSmith | Publicação v2 e instrumentação real | Snapshot do Hub, geração, 3 julgamentos e 5 feedbacks confirmados | Valida integração, não constitui aprovação acadêmica |
-| Comparação integral | Mesmos prompts e modelos | Em execução sobre os 15 exemplos | Resultados finais serão registrados somente após conferência remota |
+| Comparação integral | Mesmos prompts e modelos | Pausada, sem completar os 15 exemplos | Resultados finais serão registrados somente após conferência remota |
 
 ## Integridade e retomada
 
@@ -39,3 +39,5 @@ A publicação do prompt é pública; dataset, projetos e traces não se tornam 
 A API LangSmith rejeitou um feedback com HTTP422 porque a fórmula original produziu `0.9872000000000001` e o endpoint aceita no máximo quatro casas decimais. A correção arredonda somente a nota serializada para a API; o valor bruto permanece no checkpoint e em `source_info.raw_metric_score`. Médias acadêmicas usam os valores brutos. A verificação remota compara a representação de quatro casas. O caso afetado foi recuperado a partir das saídas reais já registradas dos juízes, sem repetir inferência.
 
 Uma alteração do runner invalida a retomada normal. A opção explícita `--adopt-runner-upgrade` exige arquivo fonte anterior com SHA256 comprovado, arquiva o checkpoint anterior sem sobrescrevê-lo e registra a migração após validar os resultados remotos. Não é uma nova iteração de prompt.
+
+Estado detalhado após a troca explícita do juiz: [status pendente](evidence/langsmith/status-pendente-2026-09-20.md).

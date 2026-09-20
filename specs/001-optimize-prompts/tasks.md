@@ -59,3 +59,9 @@ Convergência após T015: achado R294-01 resolvido e revisado independentemente;
 - [ ] T021 Executar smoke real e avaliação completa v1/v2 (15cada), verificar75feedbacks e três traces por experimento.
 - [x] T022 Publicar v2 no Hub somente com handle confirmado; registrar commit e equivalência do snapshot.
 - [ ] T023 Documentar resultados reais, links e requisitos acadêmicos ainda pendentes, sem fabricar3–5iterações.
+
+## Fase 11 — Comparação homogênea após troca explícita do juiz
+- [ ] T024 Executar novos experimentos completos v1/v2 com spark/code nos dois papéis, sem reutilizar notas spark/fast.
+- [ ] T025 Analisar os casos e registrar iterações reais do prompt com hipóteses, commits Hub e resultados; não contabilizar migrações técnicas.
+- [ ] T026 Compartilhar somente dataset/experimentos e três traces selecionados do desafio; conferir acesso anônimo e capturas finais.
+- [x] T027 Preservar checkpoints e evidências, documentar a pausa solicitada pelo autor em docs/evidence/langsmith/status-pendente-2026-09-20.md. T024–T026 continuam pendentes; nenhum lote adicional foi iniciado após a pausa.

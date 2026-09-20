@@ -18,7 +18,7 @@ O handle público do workspace foi confirmado como `renandlsantos`. O Hub modern
 
 Para v2, informar `--prompt-ref` com o commit publicado e `--dataset-id` com o ID do relatório v1. Assim os dois experimentos compartilham exatamente o mesmo dataset. A opção `--limit 1` permite smoke; `--resume` reutiliza somente exemplos completos com insumos, configuração, hash do runner, dataset e feedbacks remotos verificados. Criar um arquivo `.stop` de mesmo nome-base do relatório pausa antes do próximo exemplo.
 
-O runner usa `spark/code` e juiz `spark/fast`, temperatura 0, 4096 tokens, timeout de 300 s e concorrência 1. Registra um trace raiz por exemplo, um filho LLM da geração e três filhos LLM dos julgamentos; nenhum `reasoning_content` é armazenado. As cinco notas são os três scores acadêmicos e as duas médias derivadas originais, sem alterar os arquivos congelados.
+O runner usa `spark/code` para gerar e julgar, temperatura 0, 4096 tokens, timeout de 300 s e concorrência 1. Registra um trace raiz por exemplo, um filho LLM da geração e três filhos LLM dos julgamentos; nenhum `reasoning_content` é armazenado. As cinco notas são os três scores acadêmicos e as duas médias derivadas originais, sem alterar os arquivos congelados.
 
 ## Onde localizar os resultados
 
@@ -33,3 +33,7 @@ O projeto-base `MBA-ESAI` pode ficar vazio: cada avaliação cria um **experimen
 As dependências acadêmicas continuam fixadas, incluindo LangSmith 0.2.7. A interface exibiu aviso sobre dois endpoints depreciados com prazo em 31/01/2027; os endpoints específicos não foram identificados no aviso observado. A execução atual é verificada pela API; a compatibilidade futura exige revisão própria, sem atualizar arbitrariamente a base congelada.
 
 Uma execução completa exige 15 exemplos, feedbacks remotos correspondentes e três árvores de trace completas. Amostra parcial nunca recebe média nem aprovação. `academic_acceptance` continua falso enquanto o conjunto integral de requisitos, incluindo histórico real de iterações, não estiver demonstrado. Smoke ou repetição operacional não são contabilizados como novas iterações de otimização.
+
+## Estado atual
+
+Fase pausada a pedido do autor. O padrão atual é `spark/code` para ambos os papéis; o histórico com `spark/fast` não pode ser reutilizado nesse novo experimento. JSON mode foi apenas diagnosticado, não implementado. Consulte [status pendente](evidence/langsmith/status-pendente-2026-09-20.md).
