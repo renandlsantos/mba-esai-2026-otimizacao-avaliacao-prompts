@@ -47,3 +47,8 @@ MVP: pull sem perda de dados. Depois v2 e push com testes. Por último evidênci
 Achado reproduzido: `{}` vira zero nas métricas originais e pode ser diluído por 14 notas válidas. Plano revisado: executar mesmas funções congeladas com parser estrito isolado, sem mutar módulo global, prompts, fórmulas ou arquivo original. Validar precision/recall/reasoning no F1 e score/reasoning nas demais antes do cálculo.
 
 Convergência após T015: achado R294-01 resolvido e revisado independentemente; permanecem apenas T010/T014 de evidência externa.
+
+## Fase 9 — Avaliação local Spark complementar
+- [x] T016 Implementar src/evaluate_spark.py preservando arquivos protegidos e redigindo erros.
+- [x] T017 Testar isolamento, fórmulas, falhas e checkpoint em tests/test_spark.py.
+- [ ] T018 Executar baseline real v1/v2 (15 cada) e registrar evidências locais, mantendo T010/T014 pendentes de LangSmith.

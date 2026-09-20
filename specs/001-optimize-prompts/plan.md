@@ -32,3 +32,6 @@ Pré e pós design: PASS. Sem alterações nos arquivos congelados, código limi
 
 ## Complexity Tracking
 Sem exceções constitucionais. Avaliação comparativa auxiliar será documentada usando funções públicas do avaliador sem modificar seus arquivos.
+
+## Runner complementar Spark
+OpenAI client direto, timeout de 300 s, 4096 tokens, concorrência 1, gerador spark/code e juiz spark/fast. Reutilizar funções congeladas com globals privados, parser estrito e erros redigidos. Checkpoint atômico por exemplo; relatório completo apenas após 15 exemplos. Sem nova dependência.

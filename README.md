@@ -84,7 +84,7 @@ pelo menos três traces. Faça entre três e cinco iterações registrando o mot
 
 ## Resultados Finais
 
-**Ainda não medidos.** Credenciais não foram procuradas nem utilizadas nesta etapa.
+**Resultados acadêmicos LangSmith ainda não medidos.** A execução complementar Spark, com credencial explicitamente autorizada, é documentada separadamente abaixo.
 
 | Métrica | v1 | v2 | Critério |
 |---|---|---|---|
@@ -116,4 +116,21 @@ API consultada: [documentação oficial do LangSmith](https://docs.langchain.com
 A implementação verifica as assinaturas da versão fixada pelo upstream, que difere da documentação mais recente.
 
 ### Correção após revisão independente
-O runner complementar valida agora o JSON bruto do juiz em `src/strict_metrics.py` antes dos defaults das métricas originais. `{}` ou uma resposta sem nota/justificativa interrompe a avaliação, em vez de virar zero e ser diluída na média. A nota zero completa continua válida. Os prompts e fórmulas congelados são executados com um parser isolado por chamada; `metrics.py` e os demais arquivos protegidos permanecem intactos. Foram adicionadas 19 regressões; suíte atual: 54 testes offline. Validação concorrente independente confirmou que os parsers não interferem entre métricas.
+O runner complementar valida agora o JSON bruto do juiz em `src/strict_metrics.py` antes dos defaults das métricas originais. `{}` ou uma resposta sem nota/justificativa interrompe a avaliação, em vez de virar zero e ser diluída na média. A nota zero completa continua válida. Os prompts e fórmulas congelados são executados com um parser isolado por chamada; `metrics.py` e os demais arquivos protegidos permanecem intactos. Foram adicionadas 19 regressões; suíte naquela revisão: 54 testes offline. Validação concorrente independente confirmou que os parsers não interferem entre métricas.
+
+## Avaliação complementar local com Spark
+
+O runner `src/evaluate_spark.py` executa sequencialmente os 15 exemplos congelados para uma versão. Usa `spark/code` para gerar e `spark/fast` para julgar, temperatura 0, 4096 tokens e timeout de 300 s, sem retries automáticos. Lê exclusivamente `~/.config/spark/spark-api.env` via python-dotenv sem interpolação de variáveis (`SPARK_BASE_URL`/`SPARK_API_KEY`, ou aliases `OPENAI_BASE_URL`/`OPENAI_API_KEY`). Não imprime configuração, requests, exceções do provedor ou `reasoning_content`.
+
+```bash
+.venv/bin/python src/evaluate_spark.py --version v1 --output results/spark-v1.json
+.venv/bin/python src/evaluate_spark.py --version v2 --output results/spark-v2.json
+```
+
+Sem `--resume`, o destino não pode existir. Cada exemplo concluído é persistido atomicamente; uma falha deixa `complete:false`, sem médias nem aprovação. As funções originais são compiladas de sua AST em namespace privado, preservando prompts e fórmulas sem executar os imports e `load_dotenv()` dos módulos congelados (que procurariam configurações ancestrais). O parser exige JSON e notas válidas. O relatório registra hashes dos insumos, respostas finais e scores; não armazena raciocínio interno do modelo.
+
+Esta comparação é local e exploratória: não cria experimentos, dashboard ou traces LangSmith e **não satisfaz sozinha a entrega exigida pela plataforma**. O juiz não foi calibrado com avaliadores humanos; as médias são estimativas desse juiz, não uma certificação de qualidade.
+
+Para uma amostra curta, use `--limit 3`. Retome no mesmo arquivo com `--resume` (e opcionalmente novo `--limit`); configuração e hashes devem coincidir. Só exemplos integralmente avaliados são reutilizados. Amostras menores que 15 exemplos não recebem médias nem aprovação. Criar um arquivo `.stop` ao lado do relatório (mesmo nome-base) pausa antes do próximo exemplo; remova-o antes de retomar.
+
+O caminho de credenciais pode ser alterado explicitamente com `--credentials /caminho/spark-api.env`. A retomada requer a mesma versão do runner e do parser estrito além dos hashes registrados. Uma avaliação completa abaixo do limiar retorna exit code 1; uma amostra parcial retorna 0 com `complete:false`, sem aprovação.

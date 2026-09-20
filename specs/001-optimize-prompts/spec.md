@@ -56,3 +56,6 @@ EvaluationEvidence: versão/hash, provedor/modelos, dataset, cinco métricas, li
 
 ## Assumptions
 O titular configura credenciais e escolhe modelos disponíveis. Não há autorização para procurar segredos. Submissão na plataforma e publicação de prompts aguardam coordenação. O software suporta as dependências fixadas pelo upstream; ambiente recomendado Python 3.11.
+
+## Complemento local Spark (2026-09-20)
+Executar 15 exemplos por versão v1/v2 com Spark explícito; preservar prompts e fórmulas congelados. Não substitui LangSmith. Falhas não recebem notas sintéticas; nenhum segredo ou reasoning_content persiste.
