@@ -1,0 +1,258 @@
+{
+  "metadata": {
+    "runner_sha256": "7e5557ad98cab0bae56bc2fc7fd89ad08fd76aec170dedf176d082f75f074f96",
+    "version": "v1",
+    "hashes": {
+      "datasets/bug_to_user_story.jsonl": "4b1ef15e41437f7823daae6f0cef92a7ba16b19352d4d3b36a1bbc69db48f60b",
+      "prompts/bug_to_user_story_v1.yml": "a5d436eae1df68052dc833917a1d923db162d63338b86f869d0a26f5af563d16",
+      "src/metrics.py": "579a3df3c1b949bac567ff508e649c6c3a2ec8bc17ff4a71bafdda96a1bda0dc",
+      "src/strict_metrics.py": "4c92a34cafe9135993509ccc38422353d64c8ec374289216b550318f65a205c7",
+      "src/evaluate_spark.py": "505c7f676aaf670a3b7a71c92003788299753f22e0b780e560a63104c4ca6cd2"
+    },
+    "generator": "spark/code",
+    "judge": "spark/code",
+    "judge_response_format": "json_object",
+    "temperature": 0,
+    "max_tokens": 4096,
+    "timeout_seconds": 300,
+    "concurrency": 1,
+    "base_project": "MBA-ESAI",
+    "prompt_source": "hub-verified-local-equivalent",
+    "hub_ref": "leonanluppi/bug_to_user_story_v1:2950c33dbd7ffaed2e440b50adfd7769d183f90faf0bae5aa4864354f88e4073",
+    "hub_commit": "2950c33dbd7ffaed2e440b50adfd7769d183f90faf0bae5aa4864354f88e4073"
+  },
+  "experiment_name": "MBA-ESAI-Spark-v1-20260920T160054086656Z",
+  "project_id": "47d55aaa-eb7a-4094-9c7f-802196f749e5",
+  "dataset_id": "e76d86a5-6445-4b3c-8519-69f125650979",
+  "example_ids": [
+    "311ba5f0-3051-43a0-8129-c2c719eb2936",
+    "8a51b54a-07ad-4600-a059-d345945c91fb",
+    "5944a624-894d-4ecf-8916-406354387bc7",
+    "cbab48df-612a-4499-928d-6069e5ffb82e",
+    "2779f463-9351-4c2b-b568-df624a78c739",
+    "7f849c5f-75d1-4e45-aa6e-78b0303fc026",
+    "5e95d3f6-156f-4a83-8ac1-03d239507e2f",
+    "26e525af-5c6f-413a-9b2c-52473b51e696",
+    "ff3c82b5-13eb-4d49-9511-bb5d381b9a07",
+    "ffb3ecb1-7144-47f6-a7ff-2cc8d493d4fd",
+    "514981b0-7722-40bf-a868-0c377694a1af",
+    "6044dd7f-922c-473d-a0a1-6393294afbed",
+    "5cf2396c-9230-46dd-afe9-829b0f53ff17",
+    "6f292da9-90d8-4038-9eb3-615f85da1a34",
+    "16db5754-efbe-4827-9fc0-34b3faf9bfc8"
+  ],
+  "dashboard_url": "https://smith.langchain.com/o/99fa135f-5317-45c0-9795-6b5836b05b44/projects/p/47d55aaa-eb7a-4094-9c7f-802196f749e5",
+  "examples": [
+    {
+      "index": 1,
+      "example_id": "311ba5f0-3051-43a0-8129-c2c719eb2936",
+      "run_id": "3ff89b53-80a9-4e2f-b0c0-f2597fc85b47",
+      "answer": "**User Story:**  \nComo usuário, quero conseguir adicionar o produto ID 1234 ao meu carrinho de compras ao clicar no botão correspondente, para que eu possa finalizar a compra normalmente.\n\n**Critérios de Aceitação:**  \n- Ao acessar a página do produto ID 1234, o botão \"Adicionar ao Carrinho\" está visível e habilitado.  \n- Ao clicar no botão, o produto é adicionado ao carrinho sem erros (nenhum erro no console, sem recarregar a página, nem mensagem de falha).  \n- O contador do carrinho (ex: \"Carrinho (1)\") é atualizado corretamente após a adição.  \n- O produto aparece na lista de itens do carrinho ao acessar a página do carrinho.  \n- O comportamento é consistente em navegadores principais (Chrome, Firefox, Safari, Edge).  \n\n**Notas Técnicas (para equipe de desenvolvimento):**  \nInvestigar possíveis erros no evento `click` do botão, validação de stock, integração com a API do carrinho e tratamento de erros específicos para o produto ID 1234 (ex: dados inválidos, configuração de variação, ou problema no backend).",
+      "scores": {
+        "f1_score": 1.0,
+        "clarity": 0.85,
+        "precision": 0.83,
+        "helpfulness": 0.84,
+        "correctness": 0.915
+      }
+    },
+    {
+      "index": 2,
+      "example_id": "8a51b54a-07ad-4600-a059-d345945c91fb",
+      "run_id": "b7da6b2a-d7f4-401f-b81c-eb0c0c304778",
+      "answer": "**User Story:**  \n**Como** usuário que está se cadastrando  \n**Quero que** o campo de e-mail valide a presença do caractere \"@\" antes de permitir o envio do formulário  \n**Para que** apenas e-mails válidos sejam aceitos, evitando cadastros inválidos e problemas futuros de comunicação (ex: envio de confirmação ou senhas).  \n\n**Critérios de Aceitação:**  \n- [ ] O campo de e-mail exibe uma mensagem de erro clara (ex: “Insira um endereço de e-mail válido”) ao tentar submeter um valor sem \"@\"  \n- [ ] O botão de cadastro permanece desabilitado ou o formulário não é submetido enquanto o e-mail estiver inválido  \n- [ ] E-mails válidos com \"@\" (ex: `usuario@exemplo.com`) são aceitos normalmente  \n- [ ] Validação ocorre tanto no frontend (UX imediata) quanto no backend (segurança)",
+      "scores": {
+        "f1_score": 1.0,
+        "clarity": 0.95,
+        "precision": 0.93,
+        "helpfulness": 0.94,
+        "correctness": 0.9650000000000001
+      }
+    },
+    {
+      "index": 3,
+      "example_id": "5944a624-894d-4ecf-8916-406354387bc7",
+      "run_id": "92a9bee5-1d14-4dff-a438-ec5f1524bc88",
+      "answer": "**User Story:**  \nComo usuário do aplicativo no iOS, quero que a tela de perfil se adapte corretamente à rotação do dispositivo para o modo paisagem, para que a interface permaneça funcional, legível e visualmente consistente, sem elementos sobrepostos, cortados ou desalinhados.  \n\n**Critérios de Aceitação:**  \n- [ ] Ao girar o dispositivo para o modo paisagem, todos os elementos da tela de perfil (foto de perfil, nome, bio, botões de ação, seções de conteúdo) são redimensionados e reposicionados adequadamente.  \n- [ ] Não há sobreposição de elementos, truncamento de texto ou perda de funcionalidade (ex: botões clicáveis fora da área visível).  \n- [ ] O layout respeita as diretrizes de design do iOS (ex: Safe Areas, tamanho mínimo de toque, hierarquia visual clara).  \n- [ ] O comportamento é consistente em diferentes tamanhos de tela (iPhone SE, iPhone 14 Pro Max, etc.).  \n- [ ] Ao voltar ao modo retrato, o layout volta ao estado original sem falhas ou artefatos visuais.",
+      "scores": {
+        "f1_score": 1.0,
+        "clarity": 0.85,
+        "precision": 0.93,
+        "helpfulness": 0.89,
+        "correctness": 0.9650000000000001
+      }
+    },
+    {
+      "index": 4,
+      "example_id": "cbab48df-612a-4499-928d-6069e5ffb82e",
+      "run_id": "47e7ab46-dc9a-4bb8-bb94-44eae9e254da",
+      "answer": "**User Story:**  \nComo usuário do dashboard, quero que a contagem exibida de usuários ativos corresponda exatamente ao número de usuários listados, para evitar confusão e garantir a integridade dos dados apresentados.\n\n**Critérios de Aceitação:**  \n- [ ] A contagem de usuários ativos no dashboard (ex: “50 ativos”) deve ser calculada com base apenas nos usuários listados e efetivamente marcados como ativos.  \n- [ ] A lista de usuários exibida deve incluir todos os usuários ativos (nenhum ausente).  \n- [ ] A lógica de contagem deve considerar apenas usuários com status “ativo” (excluindo inativos, pendentes, etc.).  \n- [ ] Ao filtrar ou atualizar a lista, a contagem deve ser recalculada e atualizada em tempo real.  \n- [ ] Testes unitários e de integração devem validar que a contagem corresponde ao tamanho da lista filtrada.",
+      "scores": {
+        "f1_score": 0.8471,
+        "clarity": 0.85,
+        "precision": 0.83,
+        "helpfulness": 0.84,
+        "correctness": 0.8385499999999999
+      }
+    },
+    {
+      "index": 5,
+      "example_id": "2779f463-9351-4c2b-b568-df624a78c739",
+      "run_id": "ce5030ab-dc25-4c91-8a30-e637e3639338",
+      "answer": "**User Story:**  \nComo usuário do Safari, quero que as imagens dos produtos sejam exibidas corretamente, para que eu possa visualizar os produtos da mesma forma que no Chrome.\n\n**Critérios de Aceitação:**  \n- [ ] As imagens de produtos aparecem corretamente no Safari (versão mais recente e duas versões anteriores estáveis).  \n- [ ] O comportamento é consistente entre Safari e Chrome (mesma resolução, formato e carregamento das imagens).  \n- [ ] Não há erros de console relacionados a carregamento de imagens no Safari (ex: problemas com CORS, formatos não suportados como WebP sem fallback, ou uso de `aspect-ratio` sem suporte apropriado).  \n- [ ] Testes manuais e/ou automatizados confirmam o funcionamento em dispositivos iOS e macOS.",
+      "scores": {
+        "f1_score": 1.0,
+        "clarity": 0.75,
+        "precision": 0.83,
+        "helpfulness": 0.79,
+        "correctness": 0.915
+      }
+    },
+    {
+      "index": 6,
+      "example_id": "7f849c5f-75d1-4e45-aa6e-78b0303fc026",
+      "run_id": "cc6239c6-6574-4367-b685-b7d538270868",
+      "answer": "Claro! Aqui está uma **user story** bem estruturada, com base no relato do bug, seguindo o formato padrão com **papel**, **ação** e **benefício**, além de critérios de aceitação e contexto técnico relevante:\n\n---\n\n### 📝 **User Story**\n\n**Como** desenvolvedor do sistema de pagamentos  \n**Quero que** o webhook `/api/webhooks/payment` seja chamado corretamente quando um pagamento for aprovado  \n**Para que** o status do pedido seja atualizado automaticamente para \"aprovado\" e o cliente receba confirmação do pagamento.\n\n---\n\n### 🔍 **Contexto / Detalhes do Bug**\n- Ao realizar um pagamento com cartão de crédito e o gateway aprovar o pagamento, o sistema **não recebe a notificação via webhook**.\n- Os logs do gateway indicam um **HTTP 500 (Internal Server Error)** ao tentar fazer POST para `/api/webhooks/payment`.\n- Como consequência, o pedido permanece com status **\"pendente\"**, gerando retrabalho manual e impacto na experiência do cliente.\n\n---\n\n### ✅ **Critérios de Aceitação**\n1. O endpoint `/api/webhooks/payment` responde com **HTTP 200 OK** ao receber uma notificação válida de pagamento aprovado.\n2. Ao receber uma notificação de pagamento aprovado, o sistema:\n   - Atualiza o status do pedido para **\"aprovado\"**.\n   - Registra a data/hora da aprovação.\n   - Envia confirmação ao cliente (se aplicável).\n3. O endpoint deve validar a autenticidade da requisição (ex: verificação de assatura HMAC, token ou IP confiável).\n4. Em caso de erro interno, o endpoint deve:\n   - Retornar um código de erro apropriado (ex: 4xx/5xx com mensagem clara).\n   - Registrar o erro com logs estruturados (incluindo ID do pedido, ID da transação, payload recebido).\n5. O sistema deve ter retry automático com backoff exponencial para notificações falhadas (ex: até 3 tentativas).\n\n---\n\n### 🛠️ **Notas Técnicas**\n- Investigar possíveis causas do HTTP 500:\n  - Exceções não tratadas no controller `/api/webhooks/payment`.\n  - Validação de payload falha (ex: JSON inválido, campos obrigatórios ausentes).\n  - Erro de conexão com banco de dados ou serviço externo durante o processamento.\n  - Problemas de autenticação (ex: token expirado, assinatura inválida).\n- Verificar se o endpoint está exposto corretamente (ex: firewall, CORS, autenticação de entrada).\n\n---\n\nSe quiser, posso também gerar uma **tarefa técnica** ou **checklist de investigação** com base nessa user story.",
+      "scores": {
+        "f1_score": 0.9744,
+        "clarity": 0.85,
+        "precision": 0.85,
+        "helpfulness": 0.85,
+        "correctness": 0.9122
+      }
+    },
+    {
+      "index": 7,
+      "example_id": "5e95d3f6-156f-4a83-8ac1-03d239507e2f",
+      "run_id": "3dd1f159-c390-4e28-ae1b-15df5f083ba5",
+      "answer": "**User Story:**  \n**Como** usuário do sistema de vendas  \n**Quero** que o relatório de vendas seja gerado em até 30 segundos, mesmo com filtros que retornem mais de 1.000 registros  \n**Para** evitar timeouts, melhorar a experiência no horário comercial e garantir produtividade.\n\n**Critérios de Aceitação:**  \n- [ ] O tempo de resposta da geração do relatório de vendas com mais de 1.000 registros não exceda 30 segundos.  \n- [ ] Índice seja criado na coluna `data_venda` da tabela de vendas.  \n- [ ] Query de geração do relatório seja otimizada (ex.: uso de índices, evita `SELECT *`, filtros eficientes).  \n- [ ] Timeout do navegador (120s) não seja atingido sob nenhuma carga normal de uso.  \n- [ ] Teste de performance realizado com 1.000, 5.000 e 10.000 registros, validando o tempo de resposta.  \n\n**Notas técnicas adicionais:**  \n- Verificar se outros filtros (ex.: `id_vendedor`, `status`, `região`) também carecem de índices e podem ser otimizados.  \n- Considerar paginação ou carregamento assíncrono caso o volume de dados ultrapasse limites razoáveis (ex.: >50.000 registros).",
+      "scores": {
+        "f1_score": 1.0,
+        "clarity": 0.95,
+        "precision": 0.93,
+        "helpfulness": 0.94,
+        "correctness": 0.9650000000000001
+      }
+    },
+    {
+      "index": 8,
+      "example_id": "26e525af-5c6f-413a-9b2c-52473b51e696",
+      "run_id": "265987fc-9717-40ec-917b-a05620bc3b28",
+      "answer": "**User Story:**\n\n**Como** um usuário comum  \n**Quero que** o endpoint `/api/users/:id` valide minhas permissões antes de retornar dados de outros usuários  \n**Para que** eu só consiga acessar meus próprios dados ou dados de outros usuários se eu tiver permissão de administrador  \n\n**Critérios de Aceitação:**  \n- [ ] O endpoint `/api/users/:id` deve verificar se o usuário autenticado é o próprio usuário cujo ID foi solicitado **ou** possui a role `admin`.  \n- [ ] Se o usuário não tiver permissão, a resposta deve ser `403 Forbidden` com mensagem clara (ex: `\"Acesso negado: permissão de administrador exigida\"`).  \n- [ ] Usuários comuns devem receber apenas seus próprios dados ao acessar `/api/users/:id` com seu próprio ID.  \n- [ ] Usuários administradores devem continuar podendo acessar dados de qualquer usuário.  \n- [ ] A validação de permissão deve ocorrer **antes** da consulta ao banco de dados (para evitar vazamento acidental mesmo em falhas futuras).  \n\n**Severidade:** ALTA — risco de exposição de dados pessoais sensíveis (PII)",
+      "scores": {
+        "f1_score": 0.9243,
+        "clarity": 0.95,
+        "precision": 0.93,
+        "helpfulness": 0.94,
+        "correctness": 0.92715
+      }
+    },
+    {
+      "index": 9,
+      "example_id": "ff3c82b5-13eb-4d49-9511-bb5d381b9a07",
+      "run_id": "14e4c972-cd35-4eea-882b-47ff41eab06c",
+      "answer": "**User Story:**\n\n**Como** vendedor ou gestor de vendas  \n**Quero que** o cálculo do valor total no pipeline de vendas aplique o desconto de forma proporcional sobre o subtotal de todos os itens (e não apenas sobre o primeiro produto)  \n**Para que** o valor final exibido seja correto e confiável para fechamento de negócios.\n\n**Critérios de Aceitação:**\n1. Ao adicionar múltiplos produtos ao pipeline com um desconto percentual definido (ex: 10%), o sistema deve:\n   - Somar os valores dos produtos (ex: R$ 1.000 + R$ 500 = R$ 1.500)\n   - Aplicar o desconto sobre o subtotal total (ex: 10% de R$ 1.500 = R$ 150)\n   - Exibir o valor total corrigido (ex: R$ 1.500 − R$ 150 = R$ 1.350)\n2. O desconto deve ser aplicado *após* a soma dos itens, não individualmente por produto.\n3. O cálculo deve ser consistente independentemente da ordem dos produtos ou da quantidade de itens.\n4. Valores devem ser arredondados conforme a moeda local (ex: BRL → 2 casas decimais).\n\n**Exemplo de teste:**\n- Entrada:  \n  - Produto A: R$ 1.000  \n  - Produto B: R$ 500  \n  - Desconto: 10%  \n- Saída esperada: **R$ 1.350**  \n- Saída atual (bug): R$ 1.400 → **deve ser corrigido**",
+      "scores": {
+        "f1_score": 1.0,
+        "clarity": 0.95,
+        "precision": 1.0,
+        "helpfulness": 0.975,
+        "correctness": 1.0
+      }
+    },
+    {
+      "index": 10,
+      "example_id": "ffb3ecb1-7144-47f6-a7ff-2cc8d493d4fd",
+      "run_id": "c0dd5965-dbe9-4f49-a326-74419936e272",
+      "answer": "**User Story:**\n\n**Como** usuário do aplicativo Android  \n**Quero** que a lista de notificações seja carregada de forma responsiva, mesmo com mais de 50 itens  \n**Para** evitar travamentos, congelamentos da tela e mensagens de *Application Not Responding (ANR)*, garantindo uma experiência fluida e confiável.\n\n---\n\n**Critérios de Aceitação:**\n- [ ] A lista de notificações deve utilizar paginação (ex: *Paging 3* do Jetpack) ou carregamento progressivo (ex: *infinite scroll*).\n- [ ] O carregamento inicial e subsequente dos dados deve ocorrer em *background thread* (ex: usando `Coroutine`, `Flow`, ou `RxJava`).\n- [ ] A interface não deve travar ou apresentar congelamento perceptível ao carregar até 200 notificações.\n- [ ] Não deve ocorrer ANR ao interagir com a tela durante o carregamento da lista.\n- [ ] O tempo de carregamento inicial da lista com 50+ itens deve ser inferior a 1 segundo (medido em dispositivos médios, ex: Pixel 4a ou equivalente).\n\n**Notas Técnicas:**\n- Investigar uso da biblioteca [AndroidX Paging 3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview).\n- Substituir carregamento síncrono ou uso de `AsyncTask` desatualizado por *coroutines* com `Dispatchers.IO`.\n- Monitorar performance com ferramentas como *Android Profiler* e *StrictMode*.",
+      "scores": {
+        "f1_score": 0.9243,
+        "clarity": 0.85,
+        "precision": 0.93,
+        "helpfulness": 0.89,
+        "correctness": 0.92715
+      }
+    },
+    {
+      "index": 11,
+      "example_id": "514981b0-7722-40bf-a868-0c377694a1af",
+      "run_id": "3f92dce4-635d-4a36-bcdb-dbf24321ee8c",
+      "answer": "Claro! Aqui está uma **user story** bem estruturada, com base no bug relatado, seguindo o formato padrão (Como [papel], quero [funcionalidade], para que [valor]) — e incluindo critérios de aceitação para orientar o desenvolvimento:\n\n---\n\n### 📝 **User Story: Validar estoque em tempo real ao finalizar a compra**\n\n**Como** cliente ou sistema de e-commerce  \n**quero** que o carrinho e o processo de finalização de compra verifiquem o estoque disponível em tempo real  \n**para que** não seja possível concluir uma compra de produtos fora de estoque, evitando pedidos inviáveis e insatisfação do cliente.\n\n---\n\n### ✅ **Critérios de Aceitação:**\n\n1. Ao tentar adicionar um produto ao carrinho, o sistema deve verificar se há estoque suficiente e impedir a adição caso o estoque seja insuficiente (ex: tentar adicionar 3 unidades quando só há 2 disponíveis).\n2. Ao acessar a página do carrinho ou ao tentar finalizar a compra, o sistema deve revalidar o estoque dos itens no carrinho (pois o estoque pode ter sido atualizado entre a adição e a finalização).\n3. Se, ao finalizar, algum item estiver fora de estoque:\n   - O sistema deve exibir uma mensagem clara ao cliente (ex: “O produto X não está mais disponível na quantidade desejada”).\n   - O item deve ser removido do carrinho ou ajustado para a quantidade máxima disponível.\n   - O pedido não deve ser gerado.\n4. O estoque deve ser bloqueado (reservado) no momento da confirmação do pedido (não apenas na adição ao carrinho), para evitar concorrência entre clientes simultâneos.\n5. O sistema deve registrar tentativas de compra inválidas por falta de estoque para fins de monitoramento e análise.\n\n---\n\nSe quiser, posso também gerar uma *task* técnica para a equipe de backend/frontend com base nessa user story.",
+      "scores": {
+        "f1_score": 0.9243,
+        "clarity": 0.95,
+        "precision": 0.93,
+        "helpfulness": 0.94,
+        "correctness": 0.92715
+      }
+    },
+    {
+      "index": 12,
+      "example_id": "6044dd7f-922c-473d-a0a1-6393294afbed",
+      "run_id": "eeed89dc-09b8-4d22-b33c-7584710424bd",
+      "answer": "**User Story:**\n\n**Como** usuário em um dispositivo móvel ou tela pequena (< 768px),  \n**quero** que o modal de confirmação de exclusão apareça sempre acima de todos os outros elementos da interface, incluindo o menu lateral,  \n**para que** possa visualizar e interagir com os botões (ex: \"Confirmar\", \"Cancelar\") sem precisar fechar manualmente o menu lateral primeiro.\n\n**Critérios de Aceitação:**\n- [ ] O z-index do modal de confirmação de exclusão deve ser maior que o do menu lateral (ex: ≥ 1060) em telas com largura < 768px.  \n- [ ] O comportamento deve ser consistente: o modal deve ficar visível e clicável mesmo com o menu lateral aberto.  \n- [ ] Não deve haver sobreposição indevida com outros elementos críticos (ex: header, notificações).  \n- [ ] Testado em navegadores principais (Chrome, Safari, Firefox, Edge) em resoluções móveis e em modo responsivo.",
+      "scores": {
+        "f1_score": 0.7969,
+        "clarity": 0.85,
+        "precision": 0.83,
+        "helpfulness": 0.84,
+        "correctness": 0.81345
+      }
+    },
+    {
+      "index": 13,
+      "example_id": "5cf2396c-9230-46dd-afe9-829b0f53ff17",
+      "run_id": "c439d87c-5d12-49e8-b93e-562fc7a2e50b",
+      "answer": "Aqui está uma **user story** bem estruturada, alinhada com as melhores práticas (INVEST: Independent, Negotiable, Valuable, Estimable, Small, Testable), priorizando os riscos críticos identificados no relato:\n\n---\n\n### 🛡️ **User Story: Correção Crítica de Falhas no Checkout para Garantir Segurança, Confiabilidade e Experiência do Usuário**\n\n**Como** cliente realizando uma compra no checkout,  \n**quero** que o sistema seja seguro, confiável e forneça feedback claro durante o processo,  \n**para que** eu possa concluir minha compra com segurança, sem risco de cobrança indevida, perda de cupons ou experiências frustrantes.\n\n---\n\n#### ✅ **Critérios de Aceitação**\n\n1. **Segurança (XSS no campo de cupom)**  \n   - [ ] Todos os inputs do usuário (especialmente o campo de cupom) são sanitizados e/ou escapados no backend *e* frontend antes de serem renderizados ou processados.  \n   - [ ] Testes automatizados de injeção (ex: `<script>alert('xss')</script>`) são executados no pipeline CI/CD.  \n   - [ ] Cabeçalho `Content-Security-Policy` está configurado corretamente.\n\n2. **Confiabilidade do Pagamento (Gateway + DB)**  \n   - [ ] O endpoint `/api/payment/process` passa a retornar `500` ou `503` com mensagem clara em vez de `504` em falhas de timeout.  \n   - [ ] O pool de conexões do PostgreSQL é dimensionado corretamente (com *connection timeout*, *idle timeout* e *max connections* ajustados) e monitorado.  \n   - [ ] Transação de pagamento é atômica: se o pagamento é aprovado mas a criação do pedido falha, o pagamento é estornado automaticamente (ou revertido via *idempotency key*).  \n   - [ ] Logs detalhados de erros são registrados com *trace ID* para rastreabilidade.\n\n3. **Lógica de Negócio (Race condition em cupons)**  \n   - [ ] A verificação e uso do cupom são feitos em uma única transação atômica no banco de dados (ex: `UPDATE coupons SET used = used + 1 WHERE code = 'PROMO10' AND used < limit RETURNING *`).  \n   - [ ] Limite de uso é respeitado estritamente — não há superuso.  \n   - [ ] Sistema registra tentativas de uso excedentes com alerta para equipe de operações.\n\n4. **UX (Loading infinito)**  \n   - [ ] Após 30s de espera por resposta do gateway, o frontend exibe estado claro:  \n     - ✅ *\"Pagamento em análise — você receberá confirmação por e-mail em até 10 min\"*  \n     - ❌ *\"Falha ao processar pagamento — tente novamente ou entre em contato com o suporte.\"*  \n   - [ ] Botão de \"Verificar status do pedido\" é disponibilizado.  \n   - [ ] Estado da tela é resetado após timeout (spinner desaparece, botão de pagamento reabilitado).\n\n---\n\n#### 📊 **Métricas de Sucesso**\n- Zero regressões de XSS em testes de penetração.  \n- Taxa de timeout do gateway reduzida de 30% para < 2%.  \n- Uso de cupons respeita estritamente o limite (0% de superuso).  \n- 95% dos usuários recebem feedback claro em < 35s, mesmo em falhas.  \n- Q4: Redução de tickets de suporte relacionados ao checkout em ≥ 80%.  \n- Q4: Rating do app recuperado para ≥ 4.3 estrelas.\n\n---\n\n#### 🧪 **Testes Recomendados**\n- Testes de carga com simulação de 500 req/s no checkout.  \n- Testes de injeção XSS e SQLi com ferramentas como OWASP ZAP.  \n- Teste de concorrência com 100+ usuários simultâneos tentando usar o mesmo cupom.  \n- Teste de recuperação de falha (ex: gateway fora por 1 minuto).\n\n---\n\nEssa user story transforma os bugs críticos em uma meta clara, orientada ao valor do negócio e à experiência do usuário, com critérios verificáveis e testáveis — ideal para priorização em *sprint planning*.",
+      "scores": {
+        "f1_score": 0.95,
+        "clarity": 0.95,
+        "precision": 0.93,
+        "helpfulness": 0.94,
+        "correctness": 0.94
+      }
+    },
+    {
+      "index": 14,
+      "example_id": "6f292da9-90d8-4038-9eb3-615f85da1a34",
+      "run_id": "13273afa-5eb3-493b-bc1b-035d2111df70",
+      "answer": "Aqui está uma **user story** bem estruturada, alinhada com os problemas críticos descritos, focada em valor de negócio e com critérios de aceitação claros e testáveis:\n\n---\n\n### 📌 **User Story: Refatoração Completa do Sistema de Relatórios Gerenciais para Garantir Performance, Consistência e Confiabilidade**\n\n**Como** Product Owner e CEO  \n**Quero** que o sistema de relatórios gerenciais (especialmente o *Dashboard Executivo*) seja rápido, confiável e apresente dados consistentes com as fontes oficiais  \n**Para que** possa tomar decisões estratégicas com base em métricas reais, manter a confiança dos clientes enterprise e evitar cancelamentos de contratos.\n\n---\n\n### 🚨 **Problemas Críticos a Serem Resolvidos**\n1. **Performance crítica** (N+1 queries → 45s vs SLA de 3s)  \n2. **Inconsistência de dados críticos** (MRR divergente entre fontes)  \n3. **Cache obsoleto** (atualização demorada após mudanças em assinaturas)  \n4. **Exportação bloqueante** (OOM Kill e degradação de serviço)\n\n---\n\n### ✅ **Critérios de Aceitação**\n\n| ID | Critério | Detalhamento |\n|----|---------|-------------|\n| **CA-1** | **Performance do dashboard executivo** | `GET /api/reports/executive-dashboard` deve responder em ≤ 3s (p95), mesmo com empresas de até 5.000 usuários e 200+ departamentos. |\n| **CA-2** | **Eliminação de queries N+1** | Todas as métricas (usuários, licenças, métricas) devem ser carregadas em **1–2 queries otimizadas com JOINs e agregações no banco**, sem loops no código. |\n| **CA-3** | **Consistência do MRR** | Existe **uma única fonte da verdade** para cálculo de MRR (definida em documento de regras de negócio assinado por Financeiro e Produto), e todos os relatórios (dashboard, exportações, APIs) devem usar essa lógica unificada. |\n| **CA-4** | **Validação de MRR** | MRR do dashboard deve ser validado contra o sistema de faturamento (ex: Stripe/Billing) com tolerância ≤ 0,5% — e alerta automático se divergir. |\n| **CA-5** | **Invalidação inteligente de cache** | Cache Redis deve ser invalidado **em tempo real** ao ocorrerem eventos críticos (ex: upgrade/downgrade/cancelamento de assinatura), com TTL máximo de **5 minutos** para dados sensíveis. |\n| **CA-6** | **Exportação assíncrona e segura** | Exportações de relatórios grandes (>10k linhas) devem ser processadas em **job assíncrono** (ex: fila + worker), com notificação por e-mail ao final. Não deve consumir mais de 1GB de memória nem travar o servidor. |\n| **CA-7** | **Testes de carga e regressão** | Todos os endpoints de relatório devem passar por testes de carga (ex: 100 requisições/s por empresa) e testes de regressão com dados reais de 3 clientes enterprise. |\n| **CA-8** | **Documentação de regras de negócio** | Documento único e vivo com regras de cálculo de MRR, ativos, cancelamentos e upgrades — revisado mensalmente por Financeiro e Produto. |\n\n---\n\n### 📈 **Métricas de Sucesso (pós-implementação)**\n- Tempo médio de resposta do dashboard: **≤ 3s**  \n- Divergência de MRR entre fontes: **≤ 0,5%**  \n- Ocorrência de OOM Kill: **0**  \n- Tempo médio de atualização de dados após mudança de plano: **≤ 2 minutos**  \n- Satisfação de clientes (NPS de Relatórios): **≥ 80** (hoje: ~35)\n\n---\n\n### 🧩 **Dependências & Notas**\n- Requer alinhamento com time de **Financeiro** para definir regra oficial de MRR  \n- Requer revisão de schema do banco (índices, views materializadas)  \n- Pode incluir migração gradual (ex: primeiro dashboard, depois exportações)  \n- **Prioridade: P0 (Crítica)** — impacto direto em retenção de clientes enterprise\n\n---\n\nEssa user story transforma os problemas técnicos em **objetivos de negócio claros**, com entregáveis mensuráveis e critérios de sucesso objetivos — essencial para priorização e validação com stakeholders. Se quiser, posso também gerar um **epic** com tasks técnicas detalhadas (ex: refatorar endpoint, criar job de exportação, etc.).",
+      "scores": {
+        "f1_score": 0.95,
+        "clarity": 0.95,
+        "precision": 0.95,
+        "helpfulness": 0.95,
+        "correctness": 0.95
+      }
+    },
+    {
+      "index": 15,
+      "example_id": "16db5754-efbe-4827-9fc0-34b3faf9bfc8",
+      "run_id": "44ce5582-f928-4115-ad4d-1b727e9a153e",
+      "answer": "Aqui está uma **user story estruturada e priorizada**, com critérios de aceitação claros, focada em resolver os quatro bugs críticos de sincronização identificados — tudo alinhado com o contexto de um app offline-first para vendedores em campo:\n\n---\n\n### 📝 **User Story: Garantir sincronização confiável e segura em modo offline-first para usuários em campo**\n\n**Como** vendedor em campo (sem conexão constante),  \n**quero** que minhas alterações offline sejam sincronizadas com o servidor de forma confiável, sem perda de dados, respeitando ordem lógica e uso eficiente de recursos,  \n**para que** não perca compromissos, anexos ou operações, e o app permaneça estável mesmo após longos períodos offline.\n\n---\n\n### 🔍 **Problemas a resolver (baseados nos bugs reportados)**\n\n| # | Problema | Prioridade | Tipo |\n|---|---------|------------|------|\n| 1 | Conflito de dados com \"last write wins\" → perda de dados | **Crítica** | Lógica de conflito |\n| 2 | Upload de anexos não retoma (reinicia do zero) e falha silenciosa | **Alta** | Resiliência de rede |\n| 3 | Operações aplicadas fora de ordem no servidor | **Crítica** | Consistência de dados |\n| 4 | App crasha ao sincronizar >1.000 operações pendentes | **Crítica** | Gerenciamento de memória |\n\n---\n\n### ✅ **Critérios de Aceitação**\n\n#### **1. Resolução de conflitos com detecção e resolução colaborativa**\n- [ ] Ao detectar conflito (ex: mesma entidade editada por múltiplos usuários offline), o app **não sobrescreve silenciosamente** — exibe notificação clara ao usuário com opções:\n  - *Manter minha versão*  \n  - *Mesclar manualmente* (com diff visual)  \n  - *Aceitar versão do servidor*  \n- [ ] Registra-se um *conflito pendente* no banco local até resolução.\n- [ ] Timestamps client-side (com offset de rede) são usados para ordenação *antes* de aplicar conflitos.\n\n#### **2. Upload de anexos com suporte a resume e feedback claro**\n- [ ] Upload de arquivos grandes (>10MB) usa **resumable upload** (ex: chunked com offset + ETag).\n- [ ] Ao perder conexão, o upload **retoma do último byte confirmado**, não reinicia.\n- [ ] Falha após 3 tentativas exibe **alerta explícito** ao usuário com opção de:\n  - *Tentar novamente*  \n  - *Remover anexo*  \n  - *Sincronizar sem anexo (com aviso visual na UI)*  \n- [ ] Estado da tarefa **não é marcado como \"sincronizada\"** se o anexo falhar.\n\n#### **3. Ordem lógica de operações respeitada no servidor**\n- [ ] Todas as operações locais são enfileiradas com **sequência lógica (opID)** e **timestamp client-side com offset compensado**.\n- [ ] Ao sincronizar, o app envia operações em **ordem de dependência** (ex: CREATE antes de UPDATE/DELETE).\n- [ ] Servidor aplica operações em lote com **verificação de estado prévio** (ex: não aplica DELETE se entidade ainda não existe).\n- [ ] Operações inválidas (ex: DELETE de entidade inexistente) são registradas como *falha de dependência* e reenviadas após correção.\n\n#### **4. Sincronização escalável e segura para grandes volumes**\n- [ ] Sincronização é feita em **batches paginados** (máx. 100 operações por requisição).\n- [ ] Uso de memória é monitorado em tempo real: se >70% do limite do sistema (ex: 500MB no iOS), pausa sincronização e avisa usuário.\n- [ ] Operações pendentes são persistidas em banco local com **cursor de progresso**, permitindo retomada após crash.\n- [ ] App não crasha com 1.500+ operações — testado em dispositivo com 2GB RAM (simulado).\n\n---\n\n### 📊 **Métricas de Sucesso**\n| Métrica | Atual | Meta |\n|--------|-------|------|\n| Perda de dados por conflito | 30+ casos/semana | **0** |\n| Upload de anexos com falha silenciosa | ~25% dos uploads >20MB | **0%** |\n| Erro 404 em sincronização (DELETE antes de CREATE) | Recorrente | **<1%** |\n| Crashes por memória ao sincronizar | 12% dos usuários com >500 ops | **0%** |\n| NPS | 4.2 | **≥7.5** (em 60 dias) |\n\n---\n\n### 🧩 **Dependências Técnicas**\n- Implementar **Operational Transformation (OT)** ou **CRDTs leves** para conflitos.\n- Usar biblioteca de upload resumável (ex: `TUS` protocol ou `OkHttp` com range requests).\n- Criar fila de operações com **ordem topológica** (ex: usando grafo de dependências).\n- Arquitetura de sincronização baseada em **event sourcing local** (ex: `Room` + `WorkManager` no Android, `Core Data` + `Background Tasks` no iOS).\n\n---\n\n### ⚠️ **Riscos Mitigados**\n- **Risco de inconsistência de dados** → resolvido com ordem lógica + validação no servidor  \n- **Risco de perda de confiança do usuário** → resolvido com transparência (notificações de conflito/falha)  \n- **Risco de crash em dispositivos antigos** → resolvido com gerenciamento de memória e batches  \n\n---\n\nEssa user story está pronta para ser estimada, priorizada no backlog e implementada em sprints com foco em **resiliência, consistência e experiência do usuário** — não apenas em \"corrigir bugs\", mas em **reconstruir a confiança do produto**.",
+      "scores": {
+        "f1_score": 0.9243,
+        "clarity": 0.92,
+        "precision": 0.93,
+        "helpfulness": 0.925,
+        "correctness": 0.92715
+      }
+    }
+  ],
+  "complete": true,
+  "academic_acceptance": false,
+  "trace_urls": [
+    "https://smith.langchain.com/o/99fa135f-5317-45c0-9795-6b5836b05b44/projects/p/47d55aaa-eb7a-4094-9c7f-802196f749e5/r/3ff89b53-80a9-4e2f-b0c0-f2597fc85b47?poll=true",
+    "https://smith.langchain.com/o/99fa135f-5317-45c0-9795-6b5836b05b44/projects/p/47d55aaa-eb7a-4094-9c7f-802196f749e5/r/b7da6b2a-d7f4-401f-b81c-eb0c0c304778?poll=true",
+    "https://smith.langchain.com/o/99fa135f-5317-45c0-9795-6b5836b05b44/projects/p/47d55aaa-eb7a-4094-9c7f-802196f749e5/r/92a9bee5-1d14-4dff-a438-ec5f1524bc88?poll=true"
+  ],
+  "remote_feedback_verified": 75,
+  "means": {
+    "f1_score": 0.9477066666666667,
+    "clarity": 0.8946666666666666,
+    "precision": 0.904,
+    "helpfulness": 0.8993333333333333,
+    "correctness": 0.9258533333333333
+  },
+  "passed_metric_threshold": true
+}

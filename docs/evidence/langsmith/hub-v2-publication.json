@@ -1,0 +1,8 @@
+{
+  "prompt_source": "hub-verified-local-equivalent",
+  "hub_ref": "renandlsantos/bug_to_user_story_v2:332d800a16061a89ba3c9f897c3b7ef353aca9822efd77a179f2098f0f88ed56",
+  "hub_commit": "332d800a16061a89ba3c9f897c3b7ef353aca9822efd77a179f2098f0f88ed56",
+  "url": "https://smith.langchain.com/prompts/bug_to_user_story_v2/332d800a?organizationId=99fa135f-5317-45c0-9795-6b5836b05b44",
+  "is_public": true,
+  "yaml_sha256": "f0bcddb08924be425f08efd7e83a2c46639ee323b4736ed9430cd323d1ff7076"
+}

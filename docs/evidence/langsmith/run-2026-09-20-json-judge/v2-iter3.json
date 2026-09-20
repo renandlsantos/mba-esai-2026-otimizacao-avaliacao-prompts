@@ -1,0 +1,258 @@
+{
+  "metadata": {
+    "runner_sha256": "7e5557ad98cab0bae56bc2fc7fd89ad08fd76aec170dedf176d082f75f074f96",
+    "version": "v2",
+    "hashes": {
+      "datasets/bug_to_user_story.jsonl": "4b1ef15e41437f7823daae6f0cef92a7ba16b19352d4d3b36a1bbc69db48f60b",
+      "prompts/bug_to_user_story_v2.yml": "7247b3b4226dd369c0c462440976c1d1628a5475fe408ee97d3629e5c003b01f",
+      "src/metrics.py": "579a3df3c1b949bac567ff508e649c6c3a2ec8bc17ff4a71bafdda96a1bda0dc",
+      "src/strict_metrics.py": "4c92a34cafe9135993509ccc38422353d64c8ec374289216b550318f65a205c7",
+      "src/evaluate_spark.py": "505c7f676aaf670a3b7a71c92003788299753f22e0b780e560a63104c4ca6cd2"
+    },
+    "generator": "spark/code",
+    "judge": "spark/code",
+    "judge_response_format": "json_object",
+    "temperature": 0,
+    "max_tokens": 4096,
+    "timeout_seconds": 300,
+    "concurrency": 1,
+    "base_project": "MBA-ESAI",
+    "prompt_source": "hub-verified-local-equivalent",
+    "hub_ref": "renandlsantos/bug_to_user_story_v2:10109fda00006cfde5331dc15af15a481671370d6c62cd207b0264b2d0338d2b",
+    "hub_commit": "10109fda00006cfde5331dc15af15a481671370d6c62cd207b0264b2d0338d2b"
+  },
+  "experiment_name": "MBA-ESAI-Spark-v2-20260920T202345262437Z",
+  "project_id": "31b058a9-76b3-47ef-9d1c-00d497685e08",
+  "dataset_id": "e76d86a5-6445-4b3c-8519-69f125650979",
+  "example_ids": [
+    "311ba5f0-3051-43a0-8129-c2c719eb2936",
+    "8a51b54a-07ad-4600-a059-d345945c91fb",
+    "5944a624-894d-4ecf-8916-406354387bc7",
+    "cbab48df-612a-4499-928d-6069e5ffb82e",
+    "2779f463-9351-4c2b-b568-df624a78c739",
+    "7f849c5f-75d1-4e45-aa6e-78b0303fc026",
+    "5e95d3f6-156f-4a83-8ac1-03d239507e2f",
+    "26e525af-5c6f-413a-9b2c-52473b51e696",
+    "ff3c82b5-13eb-4d49-9511-bb5d381b9a07",
+    "ffb3ecb1-7144-47f6-a7ff-2cc8d493d4fd",
+    "514981b0-7722-40bf-a868-0c377694a1af",
+    "6044dd7f-922c-473d-a0a1-6393294afbed",
+    "5cf2396c-9230-46dd-afe9-829b0f53ff17",
+    "6f292da9-90d8-4038-9eb3-615f85da1a34",
+    "16db5754-efbe-4827-9fc0-34b3faf9bfc8"
+  ],
+  "dashboard_url": "https://smith.langchain.com/o/99fa135f-5317-45c0-9795-6b5836b05b44/projects/p/31b058a9-76b3-47ef-9d1c-00d497685e08",
+  "examples": [
+    {
+      "index": 1,
+      "example_id": "311ba5f0-3051-43a0-8129-c2c719eb2936",
+      "run_id": "dd6813be-f0f8-4889-8be2-b47c22a118f8",
+      "answer": "**User Story:**  \nComo pessoa que navega no catálogo, quero conseguir adicionar o produto ao carrinho ao clicar no botão correspondente, para concluir a compra conforme esperado.\n\n**Critérios de Aceitação:**  \n- Dado que estou na página de detalhes do produto ID 1234  \n- Quando eu clicar no botão \"Adicionar ao carrinho\"  \n- Então o produto deve ser incluído no carrinho  \n- E deve ser exibida uma confirmação visual de que o item foi adicionado  \n- E o contador do carrinho deve ser atualizado corretamente",
+      "scores": {
+        "f1_score": 1.0,
+        "clarity": 0.85,
+        "precision": 0.93,
+        "helpfulness": 0.89,
+        "correctness": 0.9650000000000001
+      }
+    },
+    {
+      "index": 2,
+      "example_id": "8a51b54a-07ad-4600-a059-d345945c91fb",
+      "run_id": "7526e726-4860-4313-83d4-c569afdc7bfa",
+      "answer": "**User Story:**  \nComo pessoa que se cadastra no sistema, quero que o campo de e-mail valide a presença do caractere \"@\" antes de permitir o cadastro, para garantir que o e-mail informado seja válido.\n\n**Critérios de Aceitação:**  \n- Dado que o campo de e-mail está preenchido com um texto sem \"@\"  \n- Quando o usuário tentar confirmar o cadastro  \n- Então o sistema deve exibir mensagem de erro indicando que o e-mail é inválido  \n- E o cadastro não deve ser concluído  \n- E o campo deve permanecer editável para correção",
+      "scores": {
+        "f1_score": 1.0,
+        "clarity": 0.95,
+        "precision": 0.97,
+        "helpfulness": 0.96,
+        "correctness": 0.985
+      }
+    },
+    {
+      "index": 3,
+      "example_id": "5944a624-894d-4ecf-8916-406354387bc7",
+      "run_id": "cd2152aa-9f0b-4bc5-92e2-4ab02f1715d9",
+      "answer": "**User Story:**  \nComo pessoa que acessa a tela de perfil no iOS, quero que o layout se adapte corretamente ao modo paisagem, para manter a usabilidade e a integridade visual da interface.\n\n**Critérios de Aceitação:**  \n- Dado que estou na tela de perfil no modo retrato  \n- Quando giro o dispositivo para o modo paisagem  \n- Então todos os elementos da interface devem permanecer visíveis, alinhados e legíveis  \n- E os controles interativos devem estar acessíveis sem sobreposição  \n- E o conteúdo não deve ser cortado, esticado ou distorcido horizontalmente",
+      "scores": {
+        "f1_score": 1.0,
+        "clarity": 0.85,
+        "precision": 0.93,
+        "helpfulness": 0.89,
+        "correctness": 0.9650000000000001
+      }
+    },
+    {
+      "index": 4,
+      "example_id": "cbab48df-612a-4499-928d-6069e5ffb82e",
+      "run_id": "2872292e-edb7-4c79-93e5-e14eb4fb34ec",
+      "answer": "**User Story:**  \nComo pessoa que analisa o dashboard, quero que a contagem de usuários ativos reflita exatamente a quantidade de usuários exibidos na lista, para tomar decisões com base em dados confiáveis.\n\n**Critérios de Aceitação:**  \n- Dado que o dashboard exibe uma contagem de 50 usuários ativos  \n- Quando eu verifico a lista de usuários ativos na mesma tela ou página  \n- Então a lista deve conter exatamente 50 usuários  \n- E a contagem deve ser atualizada automaticamente ao alterar filtros ou recarregar a página  \n- E a lista e a contagem devem estar baseadas no mesmo conjunto de dados e critérios de \"ativo\"",
+      "scores": {
+        "f1_score": 0.7467,
+        "clarity": 0.85,
+        "precision": 0.83,
+        "helpfulness": 0.84,
+        "correctness": 0.78835
+      }
+    },
+    {
+      "index": 5,
+      "example_id": "2779f463-9351-4c2b-b568-df624a78c739",
+      "run_id": "26ecd6ef-5e89-477a-bfef-5bdce39a2a66",
+      "answer": "**User Story:**  \nComo pessoa que visualiza produtos no catálogo, quero ver as imagens dos produtos corretamente no Safari, para ter uma experiência consistente entre navegadores.\n\n**Critérios de Aceitação:**  \n- Dado que estou acessando o catálogo de produtos no Safari  \n- Quando a página com as imagens dos produtos é carregada  \n- Então as imagens devem ser exibidas corretamente, sem quebras ou placeholders vazios  \n- E o comportamento deve ser equivalente ao observado no Chrome  \n- E nenhuma imagem que funcione no Chrome deve estar ausente ou corrompida no Safari",
+      "scores": {
+        "f1_score": 1.0,
+        "clarity": 0.85,
+        "precision": 0.93,
+        "helpfulness": 0.89,
+        "correctness": 0.9650000000000001
+      }
+    },
+    {
+      "index": 6,
+      "example_id": "7f849c5f-75d1-4e45-aa6e-78b0303fc026",
+      "run_id": "03af6ef4-2c4e-4ef3-8bc9-ab66ddff2be9",
+      "answer": "**User Story:**  \nComo sistema de pagamentos, quero que o webhook de pagamento aprovado seja chamado corretamente após a aprovação no gateway, para que o status do pedido seja atualizado automaticamente.\n\n**Critérios de Aceitação:**  \n- Dado que um pedido foi criado e o pagamento foi aprovado no gateway  \n- Quando o gateway tenta enviar a notificação para `/api/webhooks/payment`  \n- Então a requisição deve ser processada com sucesso (HTTP 200)  \n- E o status do pedido deve ser atualizado para \"aprovado\"  \n- E o webhook não deve gerar erro interno (HTTP 500)",
+      "scores": {
+        "f1_score": 0.7467,
+        "clarity": 0.75,
+        "precision": 0.67,
+        "helpfulness": 0.71,
+        "correctness": 0.70835
+      }
+    },
+    {
+      "index": 7,
+      "example_id": "5e95d3f6-156f-4a83-8ac1-03d239507e2f",
+      "run_id": "489910f6-6701-46ff-a642-7b206aa455e7",
+      "answer": "**User Story:**  \nComo pessoa que gera relatórios de vendas, quero que a geração do relatório seja concluída em até 2 minutos mesmo com mais de 1000 registros, para evitar timeout e garantir produtividade no horário comercial.\n\n**Critérios de Aceitação:**  \n- Dado que o relatório de vendas está sendo gerado com mais de 1000 registros  \n- Quando o filtro incluir um intervalo de datas que retorne mais de 1000 registros  \n- Então o relatório deve ser concluído em até 2 minutos  \n- E não deve ocorrer timeout no navegador  \n- E o tempo de resposta deve ser consistente entre execuções com o mesmo conjunto de filtros",
+      "scores": {
+        "f1_score": 0.7742,
+        "clarity": 0.85,
+        "precision": 0.67,
+        "helpfulness": 0.76,
+        "correctness": 0.7221
+      }
+    },
+    {
+      "index": 8,
+      "example_id": "26e525af-5c6f-413a-9b2c-52473b51e696",
+      "run_id": "bc6c9d39-2845-45b7-89af-903b835acde1",
+      "answer": "**User Story:**  \nComo pessoa administradora, quero que apenas usuários com permissão de administrador possam acessar os dados de outros usuários, para proteger a privacidade e a segurança das informações pessoais.\n\n**Critérios de Aceitação:**  \n- Dado que um usuário comum (sem permissão de administrador) faz uma requisição GET para `/api/users/:id`  \n- Quando o ID informado corresponde a outro usuário (ex: administrador ou outro usuário comum)  \n- Então o sistema deve negar o acesso e retornar status 403 (Proibido)  \n- E não deve expor nenhum dado pessoal do usuário solicitado (como email, telefone, endereço)  \n- E apenas usuários com permissão de administrador devem conseguir acessar os dados completos de outros usuários",
+      "scores": {
+        "f1_score": 0.8471,
+        "clarity": 0.85,
+        "precision": 0.83,
+        "helpfulness": 0.84,
+        "correctness": 0.8385499999999999
+      }
+    },
+    {
+      "index": 9,
+      "example_id": "ff3c82b5-13eb-4d49-9511-bb5d381b9a07",
+      "run_id": "f389ae28-bd2b-4dc9-a86e-794dd9faef58",
+      "answer": "**User Story:**  \nComo pessoa que gerencia vendas, quero que o desconto seja aplicado corretamente sobre o valor total da lista de produtos, para que o valor final exibido seja preciso.\n\n**Critérios de Aceitação:**  \n- Dado que há uma lista de produtos com valores totais definidos  \n- Quando um desconto percentual é aplicado à lista  \n- Então o desconto deve ser calculado sobre a soma dos valores dos produtos, não sobre produtos individualmente  \n- E o valor total exibido deve corresponder à soma dos valores dos produtos menos o desconto aplicado sobre o total  \n- E o valor exibido deve ser consistente entre a visualização da lista e o resumo final da venda",
+      "scores": {
+        "f1_score": 0.8471,
+        "clarity": 0.75,
+        "precision": 0.67,
+        "helpfulness": 0.71,
+        "correctness": 0.7585500000000001
+      }
+    },
+    {
+      "index": 10,
+      "example_id": "ffb3ecb1-7144-47f6-a7ff-2cc8d493d4fd",
+      "run_id": "ef2b1b0b-e02e-4ac3-8ad4-e3b04a4e377d",
+      "answer": "**User Story:**  \nComo usuário do aplicativo Android, quero que a lista de notificações carregue de forma responsiva mesmo com mais de 50 itens, para evitar travamentos e garantir a continuidade da navegação.\n\n**Critérios de Aceitação:**  \n- Dado que há mais de 50 notificações disponíveis  \n- Quando a tela de notificações é aberta  \n- Então a lista deve ser exibida em até 2 segundos, sem travamento ou congelamento da interface  \n- E o carregamento deve ocorrer em thread secundária, sem bloquear a thread principal  \n- E a interface deve permanecer responsiva durante o carregamento (responde a toques e gestos)",
+      "scores": {
+        "f1_score": 0.8743,
+        "clarity": 0.75,
+        "precision": 0.83,
+        "helpfulness": 0.79,
+        "correctness": 0.85215
+      }
+    },
+    {
+      "index": 11,
+      "example_id": "514981b0-7722-40bf-a868-0c377694a1af",
+      "run_id": "e429a598-5e3d-4282-bd77-e9aa961956ed",
+      "answer": "**User Story:**  \nComo cliente que finaliza uma compra, quero que o sistema impeça a finalização quando o produto estiver fora de estoque, para evitar pedidos inviáveis e insatisfação.\n\n**Critérios de Aceitação:**  \n- Dado que o estoque de um produto está zerado  \n- Quando um cliente tenta finalizar a compra com esse produto no carrinho  \n- Então o sistema deve bloquear a finalização e exibir mensagem clara de falta de estoque  \n- E o carrinho deve impedir a adição de unidades além do estoque disponível  \n- E o estoque deve ser validado em tempo real no momento da finalização, considerando pedidos pendentes",
+      "scores": {
+        "f1_score": 0.7969,
+        "clarity": 0.85,
+        "precision": 0.83,
+        "helpfulness": 0.84,
+        "correctness": 0.81345
+      }
+    },
+    {
+      "index": 12,
+      "example_id": "6044dd7f-922c-473d-a0a1-6393294afbed",
+      "run_id": "ceb515c8-09a3-42e7-b2bb-67983de300da",
+      "answer": "**User Story:**  \nComo pessoa que tenta confirmar a exclusão de um item em telas pequenas, quero que o modal de confirmação apareça sempre acima do menu lateral, para conseguir interagir com seus botões sem precisar fechar o menu manualmente.\n\n**Critérios de Aceitação:**  \n- Dado que o menu lateral está aberto em uma tela com largura inferior a 768px  \n- Quando o modal de confirmação de exclusão for exibido  \n- Então o modal deve ter z-index maior que o do menu lateral  \n- E todos os botões do modal devem ser clicáveis diretamente  \n- E o menu lateral não deve sobrepor visualmente o modal",
+      "scores": {
+        "f1_score": 0.6857,
+        "clarity": 0.85,
+        "precision": 0.83,
+        "helpfulness": 0.84,
+        "correctness": 0.7578499999999999
+      }
+    },
+    {
+      "index": 13,
+      "example_id": "5cf2396c-9230-46dd-afe9-829b0f53ff17",
+      "run_id": "ffbc8f88-c59b-4f20-9951-1a0c7a13e5d7",
+      "answer": "Não há informações suficientes para escrever uma User Story verificável.  \nInforme a funcionalidade afetada, o comportamento atual, o esperado e os passos  \npara reproduzir o problema. Não envie chaves, senhas ou outros dados sensíveis.",
+      "scores": {
+        "f1_score": 0.0,
+        "clarity": 0.25,
+        "precision": 0.0,
+        "helpfulness": 0.125,
+        "correctness": 0.0
+      }
+    },
+    {
+      "index": 14,
+      "example_id": "6f292da9-90d8-4038-9eb3-615f85da1a34",
+      "run_id": "374dd01f-d6bb-4d3e-a362-f739a1a5156c",
+      "answer": "Não há informações suficientes para escrever uma User Story verificável.  \nInforme a funcionalidade afetada (ex: dashboard executivo, cálculo de MRR, invalidação de cache, exportação de CSV), o comportamento atual, o esperado e os passos para reproduzir o problema. Não envie chaves, senhas ou outros dados sensíveis.",
+      "scores": {
+        "f1_score": 0.0,
+        "clarity": 0.6,
+        "precision": 0.0,
+        "helpfulness": 0.3,
+        "correctness": 0.0
+      }
+    },
+    {
+      "index": 15,
+      "example_id": "16db5754-efbe-4827-9fc0-34b3faf9bfc8",
+      "run_id": "4951419c-4391-4b16-8226-b2308969f1ab",
+      "answer": "Não há informações suficientes para escrever uma User Story verificável.  \nInforme a funcionalidade afetada, o comportamento atual, o esperado e os passos  \npara reproduzir o problema. Não envie chaves, senhas ou outros dados sensíveis.",
+      "scores": {
+        "f1_score": 0.0,
+        "clarity": 0.2,
+        "precision": 0.33,
+        "helpfulness": 0.265,
+        "correctness": 0.165
+      }
+    }
+  ],
+  "complete": true,
+  "academic_acceptance": false,
+  "trace_urls": [
+    "https://smith.langchain.com/o/99fa135f-5317-45c0-9795-6b5836b05b44/projects/p/31b058a9-76b3-47ef-9d1c-00d497685e08/r/dd6813be-f0f8-4889-8be2-b47c22a118f8?poll=true",
+    "https://smith.langchain.com/o/99fa135f-5317-45c0-9795-6b5836b05b44/projects/p/31b058a9-76b3-47ef-9d1c-00d497685e08/r/7526e726-4860-4313-83d4-c569afdc7bfa?poll=true",
+    "https://smith.langchain.com/o/99fa135f-5317-45c0-9795-6b5836b05b44/projects/p/31b058a9-76b3-47ef-9d1c-00d497685e08/r/cd2152aa-9f0b-4bc5-92e2-4ab02f1715d9?poll=true"
+  ],
+  "remote_feedback_verified": 75,
+  "means": {
+    "f1_score": 0.6879133333333333,
+    "clarity": 0.7366666666666666,
+    "precision": 0.6833333333333333,
+    "helpfulness": 0.7100000000000001,
+    "correctness": 0.6856233333333334
+  },
+  "passed_metric_threshold": false
+}
