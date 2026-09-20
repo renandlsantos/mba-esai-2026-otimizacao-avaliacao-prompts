@@ -81,8 +81,178 @@
         "helpfulness": 0.84,
         "correctness": 0.915
       }
+    },
+    {
+      "index": 4,
+      "example_id": "cbab48df-612a-4499-928d-6069e5ffb82e",
+      "run_id": "586aad25-607b-4ed2-a920-372d108603aa",
+      "answer": "## Título\nCorrigir contagem de usuários ativos no dashboard para refletir a lista real\n\n## User Story\nComo pessoa que analisa o dashboard, quero que a contagem de usuários ativos corresponda exatamente ao número de usuários listados, para tomar decisões com base em dados confiáveis.\n\n## Contexto\nO dashboard exibe 50 usuários ativos, mas a lista exibe apenas 42 usuários.\n\n## Critérios de aceitação\n- Dado o dashboard aberto, quando eu verificar a contagem de usuários ativos, então o valor deve ser igual ao número de linhas exibidas na lista de usuários.\n- Dado que a lista de usuários está visível, quando eu comparar o total exibido na lista com a contagem no dashboard, então ambos devem ser idênticos.\n\n## Dúvidas a esclarecer\nNenhuma com base no relato.",
+      "scores": {
+        "f1_score": 0.8471,
+        "clarity": 0.85,
+        "precision": 0.67,
+        "helpfulness": 0.76,
+        "correctness": 0.7585500000000001
+      }
+    },
+    {
+      "index": 5,
+      "example_id": "2779f463-9351-4c2b-b568-df624a78c739",
+      "run_id": "92dbb4f5-96da-4f94-9806-de9374d0c5de",
+      "answer": "## Título\nCorrigir exibição de imagens de produtos no Safari\n\n## User Story\nComo pessoa que navega no catálogo de produtos, quero ver as imagens dos produtos no Safari, para ter uma experiência consistente entre navegadores.\n\n## Contexto\nAs imagens de produtos não são exibidas no Safari, embora funcionem corretamente no Chrome.\n\n## Critérios de aceitação\n- Dado que estou acessando o catálogo de produtos no Safari, quando a página for carregada, então as imagens dos produtos devem aparecer corretamente.\n- Dado que as imagens aparecem no Chrome, quando comparar o comportamento no Safari, então o resultado deve ser idêntico quanto à exibição das imagens.\n\n## Dúvidas a esclarecer\n- As imagens estão ausentes em todas as telas do Safari (ex: listagem, detalhe do produto) ou apenas em alguma específica?\n- Há mensagens de erro no console do Safari ao carregar as imagens?",
+      "scores": {
+        "f1_score": 0.9,
+        "clarity": 0.85,
+        "precision": 0.83,
+        "helpfulness": 0.84,
+        "correctness": 0.865
+      }
+    },
+    {
+      "index": 6,
+      "example_id": "7f849c5f-75d1-4e45-aa6e-78b0303fc026",
+      "run_id": "a6983305-4bcb-46e2-a224-f3e09bd62735",
+      "answer": "## Título\nWebhook de pagamento aprovado não é chamado devido a erro HTTP 500 no endpoint\n\n## User Story\nComo sistema de pagamentos, quero que o webhook de pagamento aprovado seja chamado com sucesso, para que o status do pedido seja atualizado automaticamente e não permaneça como \"pendente\".\n\n## Contexto\nApós o pagamento ser aprovado no gateway, o sistema tenta enviar uma notificação via POST para `/api/webhooks/payment`, mas recebe HTTP 500, impedindo a atualização do status do pedido.\n\n## Critérios de aceitação\n- Dado que o pagamento foi aprovado no gateway, quando o webhook for chamado, então o endpoint `/api/webhooks/payment` deve responder com sucesso (ex.: HTTP 200).\n- Dado que o webhook foi chamado com sucesso, quando a notificação for processada, então o status do pedido deve ser atualizado para \"aprovado\".\n\n## Dúvidas a esclarecer\n- Qual é a causa raiz do erro HTTP 500? (ex.: exceção não tratada, dados inválidos no payload, falha de dependência interna)",
+      "scores": {
+        "f1_score": 0.8471,
+        "clarity": 0.85,
+        "precision": 0.83,
+        "helpfulness": 0.84,
+        "correctness": 0.8385499999999999
+      }
+    },
+    {
+      "index": 7,
+      "example_id": "5e95d3f6-156f-4a83-8ac1-03d239507e2f",
+      "run_id": "8d8d68fd-72f2-4f36-8c3a-574ce369d889",
+      "answer": "## Título  \nMelhorar desempenho da geração de relatório de vendas com filtros que retornam >1000 registros  \n\n## User Story  \nComo pessoa usuária que gera relatórios de vendas, quero que o relatório seja gerado em até 2 minutos mesmo com mais de 1000 registros, para evitar timeout e não prejudiar meu trabalho no horário comercial.  \n\n## Contexto  \nO relatório demora mais de 120 segundos para gerar quando o filtro ultrapassa 1000 registros, causando timeout no navegador e reclamações de lentidão. A causa identificada é a ausência de índice na coluna `data_venda` na query SQL.  \n\n## Critérios de aceitação  \n- Dado um filtro que seleciona mais de 1000 registros de vendas, quando o relatório for gerado, então o tempo de resposta deve ser inferior a 120 segundos.  \n- Dado que o relatório é gerado com mais de 1000 registros, quando o processo for concluído, então não deve ocorrer timeout no navegador.  \n\n## Dúvidas a esclarecer  \nNenhuma com base no relato.",
+      "scores": {
+        "f1_score": 0.8471,
+        "clarity": 0.85,
+        "precision": 0.83,
+        "helpfulness": 0.84,
+        "correctness": 0.8385499999999999
+      }
+    },
+    {
+      "index": 8,
+      "example_id": "26e525af-5c6f-413a-9b2c-52473b51e696",
+      "run_id": "e233a13b-f99e-4850-a63d-001d2d5a0e7b",
+      "answer": "## Título  \nValidar permissões no endpoint `/api/users/:id` para impedir vazamento de dados de usuários  \n\n## User Story  \nComo desenvolvedor de segurança da aplicação, quero que o endpoint `/api/users/:id` valide se o usuário autenticado tem permissão para acessar os dados do usuário solicitado, para evitar vazamento não autorizado de dados pessoais.  \n\n## Contexto  \nO endpoint `/api/users/:id` retorna dados completos de qualquer usuário (incluindo email, telefone e endereço) sem verificar se o usuário autenticado possui permissão (ex.: ser administrador), permitindo que usuários comuns acessem dados de administradores.  \n\n## Critérios de aceitação  \n- Dado um usuário autenticado com permissão de usuário comum, quando ele acessar `GET /api/users/:id` de outro usuário (ex.: ID 1), então o sistema deve negar o acesso e retornar status `403 Forbidden`.  \n- Dado um usuário autenticado com permissão de administrador, quando ele acessar `GET /api/users/:id` de qualquer outro usuário, então o sistema deve retornar os dados solicitados com status `200 OK`.  \n- Dado um usuário autenticado tentando acessar seus próprios dados (`GET /api/users/:id` onde `:id` == ID do usuário autenticado), então o sistema deve permitir o acesso e retornar seus dados com status `200 OK`.  \n\n## Dúvidas a esclarecer  \nNenhuma com base no relato.",
+      "scores": {
+        "f1_score": 0.9474,
+        "clarity": 0.95,
+        "precision": 0.93,
+        "helpfulness": 0.94,
+        "correctness": 0.9387000000000001
+      }
+    },
+    {
+      "index": 9,
+      "example_id": "ff3c82b5-13eb-4d49-9511-bb5d381b9a07",
+      "run_id": "e2330a53-f906-4cb8-8912-d3f548afe62b",
+      "answer": "## Título  \nCorrigir cálculo de desconto no valor total da pipeline de vendas  \n\n## User Story  \nComo pessoa que gerencia vendas, quero que o desconto seja aplicado corretamente sobre o valor total da lista de produtos, para que o valor final exibido seja preciso.  \n\n## Contexto  \nO sistema aplica o desconto apenas sobre o primeiro produto, resultando em valor total incorreto (R$ 1.400 em vez de R$ 1.350).  \n\n## Critérios de aceitação  \n- Dado uma lista com múltiplos produtos e um desconto percentual, quando o valor total for calculado, então o desconto deve ser aplicado sobre a soma dos valores dos produtos, não apenas sobre o primeiro.  \n- Dado o cenário descrito (Produto A: R$ 1.000, Produto B: R$ 500, desconto de 10%), quando o valor total for exibido, então deve ser R$ 1.350.  \n\n## Dúvidas a esclarecer  \nNenhuma com base no relato.",
+      "scores": {
+        "f1_score": 1.0,
+        "clarity": 0.85,
+        "precision": 0.97,
+        "helpfulness": 0.9099999999999999,
+        "correctness": 0.985
+      }
+    },
+    {
+      "index": 10,
+      "example_id": "ffb3ecb1-7144-47f6-a7ff-2cc8d493d4fd",
+      "run_id": "408026f1-1c28-47c2-8778-2a495079674d",
+      "answer": "## Título  \nCorrigir travamento da lista de notificações ao carregar mais de 50 itens  \n\n## User Story  \nComo usuário do aplicativo Android, quero que a lista de notificações carregue rapidamente e sem travamentos, mesmo com mais de 50 itens, para ter uma experiência fluida e responsiva.  \n\n## Contexto  \nAo carregar uma lista com mais de 50 notificações, o app trava por 5–10 segundos e pode gerar ANR, pois todo o carregamento ocorre na thread principal sem paginação.  \n\n## Critérios de aceitação  \n- Dado que há mais de 50 notificações disponíveis, quando a tela de notificações for aberta, então o carregamento inicial deve ocorrer em tempo inferior a 1 segundo e sem travamento da interface.  \n- Dado que a lista não usa paginação atualmente, quando o número de itens exceder um limite razoável (ex.: 50), então o carregamento deve ser feito em thread secundária e/ou com paginação.  \n- Dado que o app está exibindo a lista de notificações, quando o usuário interagir com a tela durante ou após o carregamento, então a interface deve permanecer responsiva (sem ANR).  \n\n## Dúvidas a esclarecer  \nNenhuma com base no relato.",
+      "scores": {
+        "f1_score": 0.9243,
+        "clarity": 0.75,
+        "precision": 0.83,
+        "helpfulness": 0.79,
+        "correctness": 0.87715
+      }
+    },
+    {
+      "index": 11,
+      "example_id": "514981b0-7722-40bf-a868-0c377694a1af",
+      "run_id": "f2ae2362-ca3a-45ed-b564-b492d17cc84d",
+      "answer": "## Título  \nImpedir finalização de compra com produto fora de estoque no carrinho  \n\n## User Story  \nComo cliente, quero que o sistema impeça a finalização da compra quando o produto estiver fora de estoque no momento do checkout, para evitar pedidos inviáveis e insatisfação pós-venda.  \n\n## Contexto  \nO sistema permite que o cliente adicione produtos ao carrinho e finalize a compra mesmo após o estoque ter sido zerado por outra compra, resultando em pedido inválido e impossibilidade de envio.  \n\n## Critérios de aceitação  \n- Dado que o estoque de um produto está zerado, quando um cliente tenta adicionar unidades ao carrinho, então o sistema deve impedir a adição e exibir mensagem clara de estoque insuficiente.  \n- Dado que o estoque de um produto está zerado, quando um cliente tenta finalizar a compra com o produto no carrinho, então o sistema deve bloquear a finalização e exibir mensagem clara de estoque insuficiente.  \n- Dado que o estoque de um produto é insuficiente para a quantidade no carrinho (ex.: 1 unidade disponível, 2 no carrinho), quando o cliente tenta finalizar a compra, então o sistema deve bloquear a finalização e exibir mensagem clara com a quantidade máxima disponível.  \n\n## Dúvidas a esclarecer  \nNenhuma com base no relato.",
+      "scores": {
+        "f1_score": 0.8471,
+        "clarity": 0.95,
+        "precision": 0.93,
+        "helpfulness": 0.94,
+        "correctness": 0.88855
+      }
+    },
+    {
+      "index": 12,
+      "example_id": "6044dd7f-922c-473d-a0a1-6393294afbed",
+      "run_id": "c5b9b321-115b-4cd8-a7f9-71e971a2a565",
+      "answer": "## Título\nAjustar z-index do modal de confirmação para aparecer acima do menu lateral em telas pequenas\n\n## User Story\nComo pessoa que tenta confirmar a exclusão de um item em telas pequenas, quero que o modal de confirmação apareça sempre acima do menu lateral, para conseguir interagir com seus botões sem precisar fechar o menu manualmente.\n\n## Contexto\nEm telas com largura inferior a 768px, o modal de confirmação (z-index: 1000) aparece atrás do menu lateral (z-index: 1050), impedindo a interação com seus botões.\n\n## Critérios de aceitação\n- Dado uma tela com largura inferior a 768px, quando o modal de confirmação for exibido, então ele deve ter z-index maior que o do menu lateral.\n- Dado o modal exibido corretamente, quando eu tentar clicar em qualquer botão dentro dele, então a ação correspondente deve ser executada sem exigir fechar o menu lateral antes.\n\n## Dúvidas a esclarecer\nNenhuma com base no relato.",
+      "scores": {
+        "f1_score": 0.7875,
+        "clarity": 0.85,
+        "precision": 0.83,
+        "helpfulness": 0.84,
+        "correctness": 0.80875
+      }
+    },
+    {
+      "index": 13,
+      "example_id": "5cf2396c-9230-46dd-afe9-829b0f53ff17",
+      "run_id": "ec0f242b-016c-4f87-93ee-07bd3a50b980",
+      "answer": "## Título  \nCorrigir falhas críticas no sistema de checkout: XSS, timeout de pagamento, race condition em cupons e loading infinito  \n\n## User Story  \nComo cliente realizando checkout, quero um sistema seguro, confiável e com feedback claro, para não ter risco de fraudes, cobranças indevidas, perda de cupons ou tela travada.  \n\n## Contexto  \nO sistema apresenta quatro falhas críticas: (1) vulnerabilidade XSS no campo de cupom, (2) timeout intermitente no gateway de pagamento com inconsistência entre cobrança e criação do pedido, (3) race condition que permite uso excedente de cupons, e (4) loading infinito após timeout, sem feedback ao usuário.  \n\n## Critérios de aceitação  \n- Dado um input malicioso como `<script>alert('xss')</script>` no campo de cupom, quando for submetido, então o sistema deve sanitizá-lo e exibi-lo como texto plano (sem execução de script).  \n- Dado uma requisição de pagamento que resulta em timeout (>30s), quando o timeout ocorrer, então o sistema deve interromper o loading, informar claramente o usuário sobre o status (ex: “Tempo esgotado. Verifique se o pagamento foi processado”) e oferecer opção de retry ou suporte.  \n- Dado um cupom com limite de uso (ex: 100), quando múltiplas requisições simultâneas tentarem usá-lo, então o sistema deve garantir atomicidade na verificação e decremento do limite, impedindo uso acima do máximo.  \n- Dado um timeout no gateway de pagamento, quando o erro ocorrer, então o sistema deve verificar o status do pagamento no gateway (ex: via ID de transação) e, se já cobrado mas pedido não criado, criar o pedido automaticamente ou notificar o usuário com opção de finalizar manualmente.  \n\n## Dúvidas a esclarecer  \n- O sistema já possui mecanismo de idempotência para requisições de pagamento?  \n- Como deve ser tratado o caso em que o gateway não responde o status da transação após timeout (ex: não há confirmação de cobrança)?",
+      "scores": {
+        "f1_score": 0.9243,
+        "clarity": 0.85,
+        "precision": 0.93,
+        "helpfulness": 0.89,
+        "correctness": 0.92715
+      }
+    },
+    {
+      "index": 14,
+      "example_id": "6f292da9-90d8-4038-9eb3-615f85da1a34",
+      "run_id": "4f0ea911-a1f4-48ab-9a9f-6681b1552bff",
+      "answer": "## Título  \nCorrigir performance crítica, inconsistência de dados e falhas de concorrência no sistema de relatórios gerenciais  \n\n## User Story  \nComo time gerencial e cliente enterprise, quero relatórios rápidos, consistentes e confiáveis, para tomar decisões estratégicas com base em dados reais e manter a confiança no sistema.  \n\n## Contexto  \nO sistema apresenta quatro problemas severos: (1) query N+1 no dashboard executivo causa tempo de resposta de 45s (SLA: 3s) e uso excessivo de CPU; (2) cálculo de MRR varia entre fontes (R$ 145k–150k) devido a regras inconsistentes; (3) cache Redis com TTL de 24h e invalidação falha mantém dados desatualizados após upgrades de plano; (4) exportação de CSV consome 100% CPU e 4GB RAM, travando o servidor e causando OOM Kill.  \n\n## Critérios de aceitação  \n- Dado o endpoint `/api/reports/executive-dashboard`, quando solicitado para uma empresa com 100 departamentos, então o tempo de resposta deve ser ≤ 3s e o número total de queries ao banco deve ser ≤ 5 (incluindo joins e agregações).  \n- Dado um período de referência, quando o MRR for calculado, então o valor deve ser idêntico em todas as fontes (dashboard, relatório financeiro e planilha contábil), seguindo uma única regra de negócio validada pela área financeira.  \n- Dado que um cliente fez upgrade de plano, quando o dashboard for acessado após o upgrade, então o novo plano deve ser exibido imediatamente (atraso ≤ 1s), sem depender de expiração automática de cache.  \n- Dado um relatório anual com 365 dias e 50k linhas, quando a exportação para CSV for iniciada, então o processo deve completar em ≤ 30s, consumindo ≤ 2GB de memória e sem impactar a latência de outras requisições.  \n\n## Dúvidas a esclarecer  \n- Qual regra correta de cálculo de MRR deve ser adotada (ex.: considerar cancelamentos do mês atual ou anterior? incluir pró-rata de upgrades/downgrades?);  \n- O sistema já possui mecanismo de fila para processos pesados (ex.: exportações), ou é necessário implementar um novo?",
+      "scores": {
+        "f1_score": 0.9243,
+        "clarity": 0.95,
+        "precision": 0.95,
+        "helpfulness": 0.95,
+        "correctness": 0.9371499999999999
+      }
+    },
+    {
+      "index": 15,
+      "example_id": "16db5754-efbe-4827-9fc0-34b3faf9bfc8",
+      "run_id": "c4e4ef07-d948-4722-886f-a603eac3e954",
+      "answer": "## Título  \nCorrigir sincronização offline-first para evitar perda de dados, falhas de upload e crash por memória  \n\n## User Story  \nComo usuário em campo (ex: vendedor), quero que minhas alterações offline sejam sincronizadas corretamente com o servidor, mantendo integridade dos dados, respeitando ordem das operações e sem causar crash do app, para não perder compromissos ou anexos e manter confiança na ferramenta.  \n\n## Contexto  \nO app offline-first apresenta quatro bugs críticos: (1) merge com “last write wins” descarta atualizações de outros usuários sem aviso; (2) upload de anexos não retoma após interrupção de rede e marca tarefa como sincronizada mesmo sem anexo; (3) operações são aplicadas fora de ordem no servidor, gerando inconsistência (ex: deletar tarefa que ainda não foi criada); (4) sincronização de muitas operações pendentes excede limite de memória e causa crash.  \n\n## Critérios de aceitação  \n- Dado que dois usuários editam a mesma tarefa offline, quando ambos sincronizam, então o sistema deve aplicar merge inteligente (ex: baseado em timestamp ou versão) e notificar o usuário afetado sobre conflito não resolvido automaticamente.  \n- Dado um upload de anexo interrompido por falha de rede, quando a conexão é restabelecida, então o sistema deve retomar o upload a partir do último byte recebido (resumable upload), e só marcar a tarefa como sincronizada após confirmação de sucesso do anexo.  \n- Dado um conjunto de operações offline com timestamps client-side, quando sincronizadas, então o servidor deve aplicá-las na ordem correta (respeitando timestamps ou usando vector clock), evitando erros como tentar deletar recurso inexistente.  \n- Dado que há mais de 500 operações pendentes, quando o usuário conecta, então o sistema deve sincronizar em lotes controlados (ex: ≤ 200 operações/lote), mantendo uso de memória abaixo de 60% do limite do sistema operacional (ex: ≤ 420MB no iOS), sem crashar o app.  \n\n## Dúvidas a esclarecer  \n- O merge inteligente deve priorizar o usuário que editou por último (com timestamp confiável) ou exigir intervenção manual em todos os conflitos?  \n- Como deve ser tratado o caso de conflito de edição (ex: dois usuários alterando o mesmo campo)? Deve-se exibir diff para aprovação ou aplicar regra automática (ex: último editor vence, mas com aviso)?",
+      "scores": {
+        "f1_score": 0.8972,
+        "clarity": 0.85,
+        "precision": 0.85,
+        "helpfulness": 0.85,
+        "correctness": 0.8735999999999999
+      }
     }
   ],
-  "complete": false,
-  "academic_acceptance": false
+  "complete": true,
+  "academic_acceptance": false,
+  "trace_urls": [
+    "https://smith.langchain.com/o/99fa135f-5317-45c0-9795-6b5836b05b44/projects/p/35b0067b-0ff8-43a8-aab3-7eca3cc42a56/r/ae5477f0-f8f5-4d49-a971-9dc263dc8b85?poll=true",
+    "https://smith.langchain.com/o/99fa135f-5317-45c0-9795-6b5836b05b44/projects/p/35b0067b-0ff8-43a8-aab3-7eca3cc42a56/r/6f3da39a-35c7-4898-94ae-3a46bffbf513?poll=true",
+    "https://smith.langchain.com/o/99fa135f-5317-45c0-9795-6b5836b05b44/projects/p/35b0067b-0ff8-43a8-aab3-7eca3cc42a56/r/b0c50547-3e63-480e-9f3e-2dd5a45f4196?poll=true"
+  ],
+  "remote_feedback_verified": 75,
+  "means": {
+    "f1_score": 0.9027,
+    "clarity": 0.8633333333333333,
+    "precision": 0.8713333333333334,
+    "helpfulness": 0.8673333333333333,
+    "correctness": 0.8870166666666666
+  },
+  "passed_metric_threshold": true
 }

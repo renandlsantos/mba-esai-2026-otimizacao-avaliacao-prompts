@@ -1,0 +1,258 @@
+{
+  "metadata": {
+    "runner_sha256": "7e5557ad98cab0bae56bc2fc7fd89ad08fd76aec170dedf176d082f75f074f96",
+    "version": "v2",
+    "hashes": {
+      "datasets/bug_to_user_story.jsonl": "4b1ef15e41437f7823daae6f0cef92a7ba16b19352d4d3b36a1bbc69db48f60b",
+      "prompts/bug_to_user_story_v2.yml": "2e9c8ea7f05032cfa02d96b6301f33504ee248cf88b2d4fa358713df65d75e61",
+      "src/metrics.py": "579a3df3c1b949bac567ff508e649c6c3a2ec8bc17ff4a71bafdda96a1bda0dc",
+      "src/strict_metrics.py": "4c92a34cafe9135993509ccc38422353d64c8ec374289216b550318f65a205c7",
+      "src/evaluate_spark.py": "505c7f676aaf670a3b7a71c92003788299753f22e0b780e560a63104c4ca6cd2"
+    },
+    "generator": "spark/code",
+    "judge": "spark/code",
+    "judge_response_format": "json_object",
+    "temperature": 0,
+    "max_tokens": 4096,
+    "timeout_seconds": 300,
+    "concurrency": 1,
+    "base_project": "MBA-ESAI",
+    "prompt_source": "hub-verified-local-equivalent",
+    "hub_ref": "renandlsantos/bug_to_user_story_v2:935f49e7a80fc1e8bb68cc149d21f432b08adc7504f67d1352c3b4bbc71dc87f",
+    "hub_commit": "935f49e7a80fc1e8bb68cc149d21f432b08adc7504f67d1352c3b4bbc71dc87f"
+  },
+  "experiment_name": "MBA-ESAI-Spark-v2-20260920T203106200377Z",
+  "project_id": "8a47315d-92d6-4a7c-bf61-79dede7a6166",
+  "dataset_id": "e76d86a5-6445-4b3c-8519-69f125650979",
+  "example_ids": [
+    "311ba5f0-3051-43a0-8129-c2c719eb2936",
+    "8a51b54a-07ad-4600-a059-d345945c91fb",
+    "5944a624-894d-4ecf-8916-406354387bc7",
+    "cbab48df-612a-4499-928d-6069e5ffb82e",
+    "2779f463-9351-4c2b-b568-df624a78c739",
+    "7f849c5f-75d1-4e45-aa6e-78b0303fc026",
+    "5e95d3f6-156f-4a83-8ac1-03d239507e2f",
+    "26e525af-5c6f-413a-9b2c-52473b51e696",
+    "ff3c82b5-13eb-4d49-9511-bb5d381b9a07",
+    "ffb3ecb1-7144-47f6-a7ff-2cc8d493d4fd",
+    "514981b0-7722-40bf-a868-0c377694a1af",
+    "6044dd7f-922c-473d-a0a1-6393294afbed",
+    "5cf2396c-9230-46dd-afe9-829b0f53ff17",
+    "6f292da9-90d8-4038-9eb3-615f85da1a34",
+    "16db5754-efbe-4827-9fc0-34b3faf9bfc8"
+  ],
+  "dashboard_url": "https://smith.langchain.com/o/99fa135f-5317-45c0-9795-6b5836b05b44/projects/p/8a47315d-92d6-4a7c-bf61-79dede7a6166",
+  "examples": [
+    {
+      "index": 1,
+      "example_id": "311ba5f0-3051-43a0-8129-c2c719eb2936",
+      "run_id": "23aedfea-3ff5-4517-9106-3eaba406822f",
+      "answer": "## Título  \nBotão de adicionar ao carrinho não funciona no produto ID 1234  \n\n## User Story  \nComo pessoa que deseja adicionar produtos ao carrinho, quero que o botão funcione corretamente para todos os produtos, incluindo o ID 1234, para concluir minha compra sem erros.  \n\n## Contexto  \nO botão de adicionar ao carrinho não executa a ação esperada (não adiciona o produto ao carrinho) quando acessado no produto com ID 1234.  \n\n## Critérios de aceitação  \n- Dado que estou na página do produto ID 1234, quando eu clicar no botão de adicionar ao carrinho, então o produto deve ser adicionado ao carrinho e o carrinho deve refletir a inclusão (ex.: contagem atualizada, item visível no resumo).  \n- Dado que o produto ID 1234 está disponível e com estoque suficiente, quando eu tentar adicioná-lo ao carrinho, então não deve ocorrer erro de validação ou falha silenciosa.  \n- Dado que o produto ID 1234 tem variações (ex.: tamanho, cor), quando eu selecionar uma opção válida e clicar no botão, então o produto com a variação escolhida deve ser adicionado ao carrinho.  \n- Dado que o produto ID 1234 está em uma lista com outros produtos, quando eu adicionar esse produto ao carrinho, então os demais produtos devem permanecer acessíveis e funcionais.  \n- Dado que o carrinho já contém o produto ID 1234, quando eu adicionar novamente (com mesma variação), então a quantidade deve ser atualizada corretamente (não deve duplicar o item como linha separada).  \n\n## Dúvidas a esclarecer  \n- O problema ocorre apenas no produto ID 1234 ou também em outros produtos?  \n- O botão exibe algum comportamento visual ao ser clicado (ex.: animação, mensagem de erro)?  \n- O produto ID 1234 tem variações? Se sim, o problema ocorre com todas ou apenas com alguma?",
+      "scores": {
+        "f1_score": 1.0,
+        "clarity": 0.85,
+        "precision": 0.83,
+        "helpfulness": 0.84,
+        "correctness": 0.915
+      }
+    },
+    {
+      "index": 2,
+      "example_id": "8a51b54a-07ad-4600-a059-d345945c91fb",
+      "run_id": "f5eba8ae-2b4b-45c4-9576-e7a34d82bddd",
+      "answer": "## Título\nValidar formato de e-mail no campo de cadastro para impedir registros inválidos\n\n## User Story\nComo pessoa que se cadastra, quero que o sistema rejeite e-mails sem o caractere “@”, para garantir que apenas endereços válidos sejam aceitos no cadastro.\n\n## Contexto\nO campo de e-mail aceita entradas como “usuarioemail.com” ou “usuarioemail”, sem exigir a presença do símbolo “@”, permitindo o cadastro com dados inválidos.\n\n## Critérios de aceitação\n- Dado um campo de e-mail vazio ou preenchido com texto sem “@”, quando o usuário tentar concluir o cadastro, então o sistema deve exibir uma mensagem de erro clara e impedir o envio.\n- Dado um e-mail válido com “@” (ex: “usuario@exemplo.com”), quando o usuário tentar concluir o cadastro, então o sistema deve aceitar o valor e permitir o prosseguimento.\n- Dado um e-mail com múltiplos “@” (ex: “a@b@c.com”), quando validado, então o sistema deve considerá-lo inválido e exibir erro.\n- Dado um e-mail com “@” mas sem domínio (ex: “usuario@”), quando validado, então o sistema deve considerá-lo inválido e exibir erro.\n- Dado um e-mail com “@” mas sem parte local (ex: “@exemplo.com”), quando validado, então o sistema deve considerá-lo inválido e exibir erro.\n- Dado um e-mail válido com caracteres especiais permitidos (ex: “nome.sobrenome+tag@dominio.com.br”), quando validado, então o sistema deve aceitá-lo como válido.\n\n## Dúvidas a esclarecer\nNenhuma com base no relato.",
+      "scores": {
+        "f1_score": 0.9744,
+        "clarity": 0.85,
+        "precision": 0.83,
+        "helpfulness": 0.84,
+        "correctness": 0.9022
+      }
+    },
+    {
+      "index": 3,
+      "example_id": "5944a624-894d-4ecf-8916-406354387bc7",
+      "run_id": "2568055c-c1b0-4397-9622-433a3f1ad290",
+      "answer": "## Título\nCorrigir layout da tela de perfil ao girar o dispositivo para landscape no iOS\n\n## User Story\nComo pessoa que usa o aplicativo no iOS, quero que o layout da tela de perfil se adapte corretamente ao modo landscape, para manter a usabilidade e a integridade visual da interface.\n\n## Contexto\nAo girar o dispositivo para o modo landscape, o layout da tela de perfil apresenta quebras visuais ou de posicionamento (ex.: elementos sobrepostos, cortados ou fora de alinhamento), comprometendo a navegação e leitura.\n\n## Critérios de aceitação\n- Dado o dispositivo em modo portrait, quando eu girá-lo para landscape, então todos os elementos da tela de perfil devem permanecer visíveis, alinhados e acessíveis, sem sobreposição ou corte.\n- Dado o dispositivo em modo landscape, quando eu girá-lo de volta para portrait, então o layout deve restaurar o estado original sem distorções.\n- Dado um dispositivo iOS com tela maior (ex.: iPhone 14 Pro Max), quando eu girá-lo para landscape, então o layout deve respeitar as margens seguras e o comportamento padrão do sistema.\n- Dado um dispositivo iOS com tamanho de tela menor (ex.: iPhone SE), quando eu girá-lo para landscape, então o conteúdo deve ser redimensionado ou rolável, mantendo a legibilidade.\n- Dado o uso de rotação dinâmica (ex.: girar durante transição de tela), quando a rotação ocorrer, então não deve haver flickering, saltos ou elementos desalinhados temporários.\n\n## Dúvidas a esclarecer\nNenhuma com base no relato.",
+      "scores": {
+        "f1_score": 0.9744,
+        "clarity": 0.85,
+        "precision": 0.85,
+        "helpfulness": 0.85,
+        "correctness": 0.9122
+      }
+    },
+    {
+      "index": 4,
+      "example_id": "cbab48df-612a-4499-928d-6069e5ffb82e",
+      "run_id": "0b94e6f5-2fef-4e51-9901-fe678c038345",
+      "answer": "## Título  \nCorrigir contagem de usuários ativos no dashboard para refletir a lista real  \n\n## User Story  \nComo pessoa que analisa o dashboard, quero que a contagem de usuários ativos corresponda exatamente ao número de usuários exibidos na lista, para tomar decisões com base em dados confiáveis.  \n\n## Contexto  \nO dashboard exibe 50 usuários ativos, mas ao acessar a lista detalhada, constatam-se apenas 42 usuários. Isso gera inconsistência entre o valor agregado e os dados individuais, comprometendo a confiabilidade do relatório.  \n\n## Critérios de aceitação  \n- Dado que a lista de usuários ativos contém 42 registros válidos, quando o dashboard for carregado, então a contagem exibida deve ser 42.  \n- Dado que a lista de usuários ativos é filtrada por critérios definidos (ex: último login nos últimos 30 dias), quando novos usuários forem adicionados ou removidos dessa condição, então a contagem deve ser atualizada automaticamente sem recarga manual.  \n- Dado que há inconsistência entre contagem e lista, quando a lista for acessada, então ela deve conter todos e apenas os usuários contabilizados.  \n- Dado que a lista está vazia, quando o dashboard for carregado, então a contagem deve ser 0.  \n- Dado que há usuários com status \"inativo\" ou \"bloqueado\", quando a contagem for feita, então esses usuários não devem ser incluídos no total de \"ativos\".  \n- Dado que a lista é carregada com paginação, quando a contagem total for exibida, então ela deve representar o total de usuários ativos, não apenas os da página atual.  \n\n## Dúvidas a esclarecer  \n- Qual é o critério exato para considerar um usuário como \"ativo\"? (ex: último login nos últimos X dias, status ativo no sistema, etc.)  \n- A contagem deve incluir usuários com status \"pendente de ativação\" ou apenas usuários com status \"ativo\" formal?",
+      "scores": {
+        "f1_score": 0.9,
+        "clarity": 0.85,
+        "precision": 0.73,
+        "helpfulness": 0.79,
+        "correctness": 0.815
+      }
+    },
+    {
+      "index": 5,
+      "example_id": "2779f463-9351-4c2b-b568-df624a78c739",
+      "run_id": "5c1249a1-e591-4ea6-b42e-79f8729796d1",
+      "answer": "## Título\nImagens de produtos não carregam no Safari, embora funcionem no Chrome\n\n## User Story\nComo pessoa que navega pela loja virtual, quero ver as imagens dos produtos no Safari, para ter uma experiência consistente entre navegadores.\n\n## Contexto\nAs imagens dos produtos não são exibidas no navegador Safari, enquanto o mesmo conteúdo funciona corretamente no Chrome.\n\n## Critérios de aceitação\n- Dado que estou acessando a loja virtual no Safari, quando visualizo uma página de lista ou detalhe de produto, então as imagens devem ser exibidas corretamente.\n- Dado que as imagens carregam no Chrome, quando acesso a mesma página no Safari, então o comportamento visual (incluindo tamanho, posição e qualidade da imagem) deve ser equivalente.\n- Dado que o problema ocorre apenas no Safari, quando verifico os recursos da página (como URLs das imagens e metadados), então não devem haver erros de carregamento no console do Safari (ex: 404, CORS, MIME type inválido).\n- Dado que o problema é específico de imagens, quando outros elementos da página (texto, botões, ícones) são exibidos normalmente no Safari, então o defeito deve estar limitado ao carregamento de imagens.\n- Dado que o comportamento varia entre navegadores, quando testo em múltiplas versões recentes do Safari (ex: versão atual e última LTS), então o problema deve ser reproduzível em todas elas.\n\n## Dúvidas a esclarecer\n- As imagens são carregadas via tag `<img>`, CSS (`background-image`), ou outro mecanismo (ex: `<picture>`, `<source>` com `srcset`)?\n- As imagens usam formatos modernos como WebP ou AVIF, que podem não ser suportados nativamente em versões mais antigas do Safari?",
+      "scores": {
+        "f1_score": 0.9243,
+        "clarity": 0.75,
+        "precision": 0.83,
+        "helpfulness": 0.79,
+        "correctness": 0.87715
+      }
+    },
+    {
+      "index": 6,
+      "example_id": "7f849c5f-75d1-4e45-aa6e-78b0303fc026",
+      "run_id": "2a9b155c-905d-41b2-b548-fdb2f914d2c3",
+      "answer": "## Título\nCorrigir webhook de pagamento aprovado que não está sendo chamado devido a erro HTTP 500\n\n## User Story\nComo sistema de pagamentos, quero que o webhook de pagamento aprovado seja chamado corretamente pelo gateway, para que o status do pedido seja atualizado automaticamente para \"aprovado\" e não permaneça como \"pendente\".\n\n## Contexto\nApós o pagamento ser aprovado no gateway, o sistema não recebe a notificação via webhook (`POST /api/webhooks/payment`), resultando no status do pedido permanecendo como \"pendente\". Os logs do gateway indicam erro HTTP 500 ao tentar fazer a requisição ao endpoint do webhook.\n\n## Critérios de aceitação\n- Dado que um pagamento foi aprovado no gateway, quando o webhook for chamado, então o status do pedido correspondente deve ser atualizado para \"aprovado\".\n- Dado que o endpoint `/api/webhooks/payment` recebe uma requisição válida com dados de pagamento aprovado, quando a requisição for processada, então não deve ocorrer erro interno (HTTP 500).\n- Dado que o webhook não foi chamado anteriormente devido ao erro, quando o problema for corrigido, então o pedido deve ser atualizado corretamente ao receber a próxima notificação válida.\n- Dado um pedido com status \"pendente\" e pagamento já aprovado no gateway, quando o webhook for chamado com sucesso, então o status deve mudar para \"aprovado\" e não permanecer \"pendente\".\n- Dado um erro no processamento do webhook (ex: dados inválidos, falha interna), quando o erro ocorrer, então o sistema deve registrar o erro com detalhes suficientes para diagnóstico, sem interromper a execução de outros webhooks.\n\n## Dúvidas a esclarecer\n- O endpoint `/api/webhooks/payment` já existe e está implementado, ou precisa ser criado?\n- Quais campos são esperados no corpo da requisição do webhook (ex: ID do pedido, ID da transação, status, valor)?",
+      "scores": {
+        "f1_score": 0.8743,
+        "clarity": 0.85,
+        "precision": 0.63,
+        "helpfulness": 0.74,
+        "correctness": 0.75215
+      }
+    },
+    {
+      "index": 7,
+      "example_id": "5e95d3f6-156f-4a83-8ac1-03d239507e2f",
+      "run_id": "7992e8c2-4967-48f0-99ef-78eab9dc2956",
+      "answer": "## Título  \nMelhorar performance da geração de relatório de vendas com filtros que retornam mais de 1000 registros  \n\n## User Story  \nComo pessoa analista ou gestora de vendas, quero que o relatório seja gerado em até 2 minutos mesmo com mais de 1000 registros, para tomar decisões sem atrasos no horário comercial.  \n\n## Contexto  \nO relatório de vendas demora mais de 2 minutos (até o timeout de 120 segundos do navegador) quando o filtro resulta em mais de 1000 registros. A causa identificada é a ausência de índice na coluna `data_venda` na query SQL utilizada. Isso gera reclamações frequentes de lentidão durante o horário comercial.  \n\n## Critérios de aceitação  \n- Dado um filtro de relatório que seleciona mais de 1000 registros, quando o relatório for gerado, então o tempo de resposta deve ser inferior a 120 segundos.  \n- Dado um filtro com mais de 1000 registros, quando o relatório for gerado, então o tempo de resposta deve ser inferior a 2 minutos (120 segundos), mesmo sem recarregar a página.  \n- Dado que a query SQL usa a coluna `data_venda` em cláusulas de filtro ou ordenação, quando o índice for adicionado nessa coluna, então o tempo de execução da query deve diminuir significativamente (comparado ao comportamento atual).  \n- Dado que o relatório é acessado por múltiplos usuários simultaneamente no horário comercial, quando o volume de registros for superior a 1000, então o sistema deve manter tempo de resposta estável e previsível.  \n- Dado que o relatório inclui filtros adicionais (ex: vendedor, região, status), quando combinados com grande volume de dados, então o tempo total de geração deve permanecer dentro do limite de 120 segundos.  \n\n## Dúvidas a esclarecer  \n- O limite de 1000 registros é fixo ou deve ser ajustável (ex: configurável por ambiente ou usuário)?  \n- O tempo de 2 minutos inclui apenas o tempo de execução da query no banco ou também o tempo de renderização no navegador?",
+      "scores": {
+        "f1_score": 0.8743,
+        "clarity": 0.85,
+        "precision": 0.73,
+        "helpfulness": 0.79,
+        "correctness": 0.8021499999999999
+      }
+    },
+    {
+      "index": 8,
+      "example_id": "26e525af-5c6f-413a-9b2c-52473b51e696",
+      "run_id": "d33b1b58-a46b-4c18-887e-a63714359936",
+      "answer": "## Título  \nValidar permissões no endpoint `/api/users/:id` para impedir vazamento de dados de outros usuários  \n\n## User Story  \nComo desenvolvedor de segurança da aplicação, quero que o endpoint `/api/users/:id` valide se o usuário autenticado tem permissão para acessar os dados do usuário solicitado, para evitar vazamento não autorizado de dados pessoais sensíveis.  \n\n## Contexto  \nO endpoint `/api/users/:id` retorna dados completos de qualquer usuário (incluindo email, telefone e endereço) sem verificar se o usuário autenticado é administrador ou é o próprio usuário dono do recurso. Isso permite que usuários comuns acessem dados sensíveis de administradores e de outros usuários.  \n\n## Critérios de aceitação  \n- Dado um usuário autenticado comum (não administrador), quando ele acessar `/api/users/:id` de outro usuário (não próprio), então a requisição deve ser negada com status `403 Forbidden`.  \n- Dado um usuário autenticado como administrador, quando ele acessar `/api/users/:id` de qualquer usuário, então os dados solicitados devem ser retornados com status `200 OK`.  \n- Dado um usuário autenticado, quando ele acessar `/api/users/:id` com o próprio ID, então os dados do próprio usuário devem ser retornados com status `200 OK`.  \n- Dado um usuário não autenticado, quando ele tentar acessar `/api/users/:id`, então a requisição deve ser negada com status `401 Unauthorized`.  \n- Dado um ID inválido (não numérico ou inexistente), quando a requisição for feita, então o comportamento deve ser consistente com os padrões da API (ex: `400 Bad Request` ou `404 Not Found`).  \n- Dado um usuário comum tentando acessar dados de outro usuário comum, quando a requisição for feita, então a resposta deve ser `403 Forbidden`, não os dados solicitados.  \n\n## Dúvidas a esclarecer  \nNenhuma com base no relato.",
+      "scores": {
+        "f1_score": 0.9243,
+        "clarity": 0.95,
+        "precision": 0.93,
+        "helpfulness": 0.94,
+        "correctness": 0.92715
+      }
+    },
+    {
+      "index": 9,
+      "example_id": "ff3c82b5-13eb-4d49-9511-bb5d381b9a07",
+      "run_id": "bd3ac24d-3876-4772-aa00-66dc698ca01c",
+      "answer": "## Título  \nCorrigir cálculo do valor total na pipeline de vendas quando há desconto aplicado a múltiplos produtos  \n\n## User Story  \nComo pessoa que gerencia vendas, quero que o desconto seja aplicado corretamente sobre o valor total dos produtos (não apenas sobre o primeiro), para que o valor final exibido seja preciso e confiável.  \n\n## Contexto  \nO sistema aplica o desconto apenas sobre o primeiro produto da lista, resultando em valor total incorreto (R$ 1.400 em vez de R$ 1.350 para o cenário descrito).  \n\n## Critérios de aceitação  \n- Dado um conjunto de produtos com valores e um desconto percentual, quando o valor total for calculado, então o desconto deve ser aplicado sobre a soma dos valores dos produtos (não sobre produtos individualmente ou apenas o primeiro), resultando no valor esperado.  \n- Dado o cenário descrito (Produto A: R$ 1.000, Produto B: R$ 500, desconto de 10%), quando o valor total for exibido, então deve ser R$ 1.350.  \n- Dado um único produto com desconto, quando o valor total for calculado, então o desconto deve ser aplicado corretamente sobre esse único valor.  \n- Dado desconto zero ou nulo, quando o valor total for calculado, então deve ser igual à soma dos valores dos produtos.  \n- Dado desconto aplicado em diferentes moedas ou valores decimais, quando o cálculo for feito, então deve respeitar a precisão de duas casas decimais e a conversão correta (se aplicável).  \n- Dado que o desconto é percentual, quando o valor total com desconto for recalculado após alteração de produtos ou desconto, então o novo valor deve refletir a correção imediatamente, sem exigir recarregamento da página.  \n\n## Dúvidas a esclarecer  \nNenhuma com base no relato.",
+      "scores": {
+        "f1_score": 1.0,
+        "clarity": 0.85,
+        "precision": 0.93,
+        "helpfulness": 0.89,
+        "correctness": 0.9650000000000001
+      }
+    },
+    {
+      "index": 10,
+      "example_id": "ffb3ecb1-7144-47f6-a7ff-2cc8d493d4fd",
+      "run_id": "cd853c37-2925-4fce-a558-839904b38c2e",
+      "answer": "## Título  \nCorrigir travamento da lista de notificações ao carregar mais de 50 itens  \n\n## User Story  \nComo usuário do aplicativo Android, quero que a lista de notificações carregue de forma responsiva mesmo com mais de 50 itens, para evitar travamentos e ANRs.  \n\n## Contexto  \nAo acessar a tela de notificações com mais de 50 itens, o app trava por 5–10 segundos e, em alguns casos, exibe uma mensagem de ANR. Isso ocorre porque todos os itens são carregados de uma única vez na *main thread*, sem paginação ou carregamento assíncrono.  \n\n## Critérios de aceitação  \n- Dado que há mais de 50 notificações, quando eu abrir a tela de notificações, então o carregamento inicial deve ocorrer de forma assíncrona e não travar a interface por mais de 1 segundo.  \n- Dado que há mais de 50 notificações, quando eu rolar a lista, então novos itens devem ser carregados em lotes (paginação), sem recarregar a lista inteira.  \n- Dado que há até 50 notificações, quando eu abrir a tela, então todos os itens devem ser exibidos prontamente, sem ANR ou congelamento perceptível.  \n- Dado que o usuário interage com a tela durante o carregamento, quando o carregamento terminar, então a interface deve permanecer responsiva e não descartar interações anteriores.  \n- Dado que há falha ao carregar notificações, quando o erro ocorrer, então uma mensagem clara deve ser exibida e o usuário deve poder tentar novamente.  \n\n## Dúvidas a esclarecer  \n- Qual é o limite máximo de notificações exibidas por lote na paginação?  \n- As notificações são armazenadas localmente (ex.: banco de dados) ou obtidas via API em tempo real?",
+      "scores": {
+        "f1_score": 0.9243,
+        "clarity": 0.85,
+        "precision": 0.83,
+        "helpfulness": 0.84,
+        "correctness": 0.87715
+      }
+    },
+    {
+      "index": 11,
+      "example_id": "514981b0-7722-40bf-a868-0c377694a1af",
+      "run_id": "82b56d88-9811-41f3-bbb0-b82fd4d2d342",
+      "answer": "## Título  \nImpedir finalização de compra com produto fora de estoque no carrinho  \n\n## User Story  \nComo cliente ou sistema de vendas, quero que o carrinho impeça a finalização da compra quando o produto estiver fora de estoque, para evitar pedidos inviáveis e insatisfação do cliente.  \n\n## Contexto  \nO sistema permite que o cliente adicione produtos ao carrinho mesmo após o estoque ter sido zerado por outra compra, e permite finalizar o pedido sem validação em tempo real do estoque disponível. Isso gera pedidos que não podem ser atendidos, exigindo ações manuais (como cancelamento ou contato com o cliente) e prejudicando a confiabilidade do processo de venda.  \n\n## Critérios de aceitação  \n- Dado um produto com estoque zerado, quando o cliente tentar adicionar qualquer quantidade ao carrinho, então o sistema deve impedir a adição e exibir mensagem clara de falta de estoque.  \n- Dado um produto com estoque insuficiente para a quantidade desejada, quando o cliente tentar adicionar essa quantidade ao carrinho, então o sistema deve impedir a adição e exibir mensagem com a quantidade máxima disponível.  \n- Dado um produto com estoque insuficiente, quando o cliente tentar finalizar a compra com ele no carrinho (ex.: após ter sido adicionado antes do estoque ser esgotado), então o sistema deve bloquear a finalização e exibir mensagem de erro específica.  \n- Dado um pedido já finalizado com produto fora de estoque, quando o sistema processar o pedido, então deve haver validação de estoque antes da confirmação e, se insuficiente, o pedido deve ser cancelado ou colocado em análise com notificação ao cliente.  \n- Dado um produto com estoque atualizado em tempo real, quando o estoque for reduzido por outra compra, então as quantidades já no carrinho devem ser recalculadas e, se inválidas, o carrinho deve ser atualizado com alerta ao cliente.  \n\n## Dúvidas a esclarecer  \n- O estoque deve ser validado no momento da adição ao carrinho, da finalização da compra ou em ambos? (A descrição sugere validação em ambos, mas é importante confirmar se a validação deve ocorrer em tempo real ou apenas no momento da finalização.)",
+      "scores": {
+        "f1_score": 0.9243,
+        "clarity": 0.85,
+        "precision": 0.85,
+        "helpfulness": 0.85,
+        "correctness": 0.88715
+      }
+    },
+    {
+      "index": 12,
+      "example_id": "6044dd7f-922c-473d-a0a1-6393294afbed",
+      "run_id": "f4b404df-e3d6-460a-9590-8a3c23d527ea",
+      "answer": "## Título\nAjustar z-index do modal de confirmação para ficar acima do menu lateral em telas pequenas\n\n## User Story\nComo pessoa usuária, quero que o modal de confirmação de exclusão apareça sempre acima do menu lateral, mesmo em telas pequenas, para conseguir interagir com seus botões sem precisar fechar o menu manualmente.\n\n## Contexto\nEm telas com largura inferior a 768px, o modal de confirmação (z-index: 1000) aparece atrás do menu lateral (z-index: 1050), impedindo a interação com seus elementos — os usuários só conseguem acessar o modal após fechar o menu lateral.\n\n## Critérios de aceitação\n- Dado uma tela com largura inferior a 768px, quando o modal de confirmação for exibido, então ele deve ter z-index maior que o do menu lateral (1050), garantindo visibilidade e interatividade.\n- Dado o modal aberto, quando eu tentar clicar em qualquer botão dentro dele (ex: “Confirmar”, “Cancelar”), então a ação correspondente deve ser executada imediatamente, sem exigir fechamento prévio do menu lateral.\n- Dado o menu lateral aberto e o modal visível, quando eu redimensionar a tela para largura ≥ 768px, então o comportamento deve permanecer consistente (modal acima do menu).\n- Dado o modal aberto em tela pequena, quando o menu lateral for fechado, então o modal deve continuar visível e funcional.\n- Dado o modal aberto, quando eu tentar interagir com o fundo escuro (overlay), então o modal deve ser fechado (se for o comportamento esperado do sistema).\n- Dado o modal aberto, quando eu pressionar a tecla `Esc`, então o modal deve ser fechado (se for o comportamento esperado do sistema).\n\n## Dúvidas a esclarecer\nNenhuma com base no relato.",
+      "scores": {
+        "f1_score": 0.9243,
+        "clarity": 0.85,
+        "precision": 0.83,
+        "helpfulness": 0.84,
+        "correctness": 0.87715
+      }
+    },
+    {
+      "index": 13,
+      "example_id": "5cf2396c-9230-46dd-afe9-829b0f53ff17",
+      "run_id": "ea019172-8522-4a5e-b9bc-6a86c9fa52fa",
+      "answer": "## Título  \nCorreção de falhas críticas no sistema de checkout: XSS, timeout, race condition e UX deficiente  \n\n## User Story  \nComo cliente realizando checkout, quero um sistema seguro, confiável e com feedback claro durante o pagamento, para não correr risco de cobrança indevida, perda de cupons ou travamento da interface.  \n\n## Contexto  \nO sistema apresenta quatro falhas críticas: (1) vulnerabilidade XSS no campo de cupom, (2) timeout intermitente no gateway de pagamento com inconsistência entre cobrança e criação do pedido, (3) race condition que permite uso excedente de cupons, e (4) tela travada com loading infinito após timeout. Isso resultou em 150+ clientes afetados, perda financeira estimada em R$ 15.000, 45 tickets de suporte e queda no rating do app.  \n\n## Critérios de aceitação  \n- Dado um input malicioso como `<script>alert('xss')</script>` no campo de cupom, quando for submetido, então o sistema deve sanitizá-lo (ex.: remover ou escapar tags HTML/JS) e exibi-lo como texto plano, sem executar código.  \n- Dado um timeout (>30s) na chamada ao gateway de pagamento, quando ocorrer, então o sistema deve interromper o loading, exibir mensagem clara ao usuário (ex.: “Pagamento em processamento. Verifique seu e-mail em até 10 minutos”) e permitir nova tentativa ou contato com suporte.  \n- Dado um cupom com limite de uso (ex.: 100), quando múltiplas requisições simultâneas tentarem usá-lo, então o sistema deve garantir atomicidade na verificação e decremento do limite, impedindo uso acima do máximo.  \n- Dado um erro 504 (Gateway Timeout) ao processar pagamento, quando ocorrer, então o sistema deve verificar o status do pagamento no gateway (ex.: via ID de transação) e, se já cobrado mas pedido não criado, criar o pedido com status “pago” e notificar o cliente.  \n- Dado um cupom com uso excedente (ex.: 147/100), quando o sistema detectar uso acima do limite, então deve rejeitar o cupom com mensagem clara (“Cupom esgotado”) e não aplicar desconto.  \n- Dado um pedido com timeout no pagamento, quando o cliente acessar o histórico de pedidos, então deve constar o status correto (ex.: “pago” ou “falha”) com base no estado final confirmado pelo gateway.  \n\n## Dúvidas a esclarecer  \n- O sistema já possui mecanismo de idempotência para requisições de pagamento?  \n- Qual é o tempo máximo aceitável para verificação de status do gateway após timeout?",
+      "scores": {
+        "f1_score": 0.9243,
+        "clarity": 0.85,
+        "precision": 0.85,
+        "helpfulness": 0.85,
+        "correctness": 0.88715
+      }
+    },
+    {
+      "index": 14,
+      "example_id": "6f292da9-90d8-4038-9eb3-615f85da1a34",
+      "run_id": "17ed30f7-cbeb-4928-b3e7-11124181cac5",
+      "answer": "## Título  \nCorrigir performance crítica, consistência de dados e estabilidade em relatórios gerenciais  \n\n## User Story  \nComo time gerencial e cliente enterprise, quero relatórios rápidos, consistentes e estáveis, para tomar decisões confiáveis e manter a confiança no sistema.  \n\n## Contexto  \nO sistema de relatórios gerenciais apresenta quatro problemas críticos:  \n1. **Performance**: Query N+1 no endpoint `/api/reports/executive-dashboard` gera centenas de queries por requisição, levando a 45s de resposta (SLA: 3s) e uso excessivo de CPU do banco.  \n2. **Inconsistência de dados**: Cálculo de MRR varia entre dashboard (R$ 150k), relatório financeiro (R$ 145k) e planilha contábil (R$ 147,5k), sem regras unificadas.  \n3. **Cache desatualizado**: TTL de 24h e falha na invalidação fazem dados ficarem obsoletos após upgrades/downgrades de plano.  \n4. **Estabilidade**: Exportação de CSV de longo período consome 4GB de memória e 100% CPU por 5 minutos, causando OOM Kill e degradação de serviço.  \n\nImpacto: 15 clientes ameaçando cancelar, perda de confiança executiva e alto esforço de CS.  \n\n## Critérios de aceitação  \n- Dado um cliente com 100 departamentos, quando a requisição `/api/reports/executive-dashboard` for feita, então o tempo de resposta deve ser ≤ 3s e o número total de queries ao banco deve ser ≤ 10 (ex.: com *eager loading* ou agregação em uma única query).  \n- Dado um cliente com assinaturas ativas, canceladas e com upgrades/downgrades no mês, quando o MRR for calculado no dashboard, então o valor deve ser idêntico ao do relatório financeiro e à planilha contábil (com regra unificada documentada e validada pelo time financeiro).  \n- Dado um cliente que fez upgrade de plano, quando o dashboard for acessado até 5 minutos após a mudança, então o novo plano deve estar refletido corretamente (sem depender de TTL de 24h).  \n- Dado um relatório anual com 365 dias e 50k linhas, quando a exportação para CSV for iniciada, então o processo deve ser assíncrono (job em background), não consumir mais de 1GB de memória, e não impactar a latência de outras requisições.  \n- Dado um cliente com mais de 1000 departamentos, quando o dashboard for acessado em horário de pico, então o uso de CPU do banco deve permanecer ≤ 60%.  \n- Dado que o MRR foi recalculado com regra unificada, quando um novo relatório for gerado com os mesmos dados de 30 dias anteriores, então os valores devem ser idênticos entre dashboard, relatório financeiro e planilha contábil (validação via teste automatizado).  \n\n## Dúvidas a esclarecer  \n- Qual é a regra exata de cálculo de MRR que deve ser adotada (ex.: incluir/desconsiderar cancelamentos do mês anterior, como tratar pró-rata de upgrades/downgrades)?  \n- O sistema já possui mecanismo de job assíncrono para exportações? Se sim, qual tecnologia (ex.: Sidekiq, Celery, SQS)?",
+      "scores": {
+        "f1_score": 0.9243,
+        "clarity": 0.95,
+        "precision": 0.95,
+        "helpfulness": 0.95,
+        "correctness": 0.9371499999999999
+      }
+    },
+    {
+      "index": 15,
+      "example_id": "16db5754-efbe-4827-9fc0-34b3faf9bfc8",
+      "run_id": "279227a2-642c-4881-b4ad-d33b117ee139",
+      "answer": "## Título  \nCorrigir sincronização offline-first para evitar perda de dados, falhas de upload e crash por memória  \n\n## User Story  \nComo vendedor em campo que usa o app offline, quero que as minhas alterações sejam sincronizadas de forma confiável, com respeito à ordem das operações e sem perda de dados ou anexos, para não comprometer compromissos com clientes e manter a integridade do meu trabalho.  \n\n## Contexto  \nO app apresenta quatro bugs críticos em sincronização:  \n1. **Conflito de dados**: uso de \"last write wins\" sobrescreve alterações de outros usuários sem aviso, causando perda de dados.  \n2. **Upload de anexos**: não retoma uploads interrompidos e marca tarefas como sincronizadas mesmo sem anexo.  \n3. **Ordem de operações**: operações offline são aplicadas no servidor fora de ordem, resultando em inconsistências (ex.: tentativa de deletar tarefa ainda não criada).  \n4. **Memória**: app crasha ao sincronizar >1.000 operações pendentes devido ao carregamento massivo na memória.  \n\nImpacto comprovado: 250+ usuários afetados, NPS caiu de 8,5 para 4,2, 80% dos reviews negativos citam \"perda de dados\", churn +15% e perda estimada de R$ 200k em oportunidades.  \n\n## Critérios de aceitação  \n- Dado um conflito de edição na mesma tarefa por usuários distintos (ex.: alteração de horário), quando a sincronização ocorrer, então o sistema deve aplicar uma estratégia de resolução baseada em *conflict-free replicated data types* (CRDTs) ou *operational transformation* (OT), garantindo que ambas as alterações sejam preservadas ou mescladas semanticamente (ex.: horário atualizado + observação da alteração anterior), e o usuário deve ser notificado da mescla.  \n- Dado um upload de anexo interrompido (ex.: perda de conexão), quando a conexão for restabelecida, então o sistema deve retomar o upload a partir do último byte confirmado (resumable upload), e apenas quando concluído com sucesso deve marcar a tarefa como sincronizada.  \n- Dado um conjunto de operações offline (create, update, delete), quando a sincronização ocorrer, então as operações devem ser enviadas ao servidor respeitando a ordem cronológica baseada em *timestamp client-side* (com resolução de colisão por ID único por operação), e o servidor deve aplicá-las sequencialmente, ignorando operações inválidas (ex.: DELETE de recurso inexistente) sem invalidar operações subsequentes.  \n- Dado um volume elevado de operações pendentes (ex.: >1.000), quando a sincronização for iniciada, então o sistema deve processá-las em lotes incrementais (ex.: 200 por lote), com liberação de memória entre lotes, para evitar estouro de memória e crash do app.  \n- Dado um anexo não carregado após falha no upload, quando o usuário acessar a tarefa, então o sistema deve indicar claramente que o anexo não foi sincronizado (ex.: ícone de alerta + mensagem \"Anexo não carregado. Toque para tentar novamente\") e permitir retry manual.  \n- Dado um conflito de dados resolvido (ex.: horário de ligação mesclado), quando o usuário acessar a tarefa, então deve ser possível visualizar o histórico de alterações (quem alterou, quando e o que mudou), para garantir transparência e rastreabilidade.  \n\n## Dúvidas a esclarecer  \n- O sistema já possui identificadores únicos por operação (ex.: UUID + timestamp) ou é necessário definir um padrão?  \n- A resolução de conflitos deve considerar apenas campos editados (ex.: horário) ou todo o objeto da tarefa?  \n- Qual é o tamanho máximo recomendado de lote para sincronização em memória (ex.: 200, 500)?  \n- Deve haver um limite de tentativas de retry para upload de anexos, e se sim, qual?",
+      "scores": {
+        "f1_score": 0.9243,
+        "clarity": 0.92,
+        "precision": 0.93,
+        "helpfulness": 0.925,
+        "correctness": 0.92715
+      }
+    }
+  ],
+  "complete": true,
+  "academic_acceptance": false,
+  "trace_urls": [
+    "https://smith.langchain.com/o/99fa135f-5317-45c0-9795-6b5836b05b44/projects/p/8a47315d-92d6-4a7c-bf61-79dede7a6166/r/23aedfea-3ff5-4517-9106-3eaba406822f?poll=true",
+    "https://smith.langchain.com/o/99fa135f-5317-45c0-9795-6b5836b05b44/projects/p/8a47315d-92d6-4a7c-bf61-79dede7a6166/r/f5eba8ae-2b4b-45c4-9576-e7a34d82bddd?poll=true",
+    "https://smith.langchain.com/o/99fa135f-5317-45c0-9795-6b5836b05b44/projects/p/8a47315d-92d6-4a7c-bf61-79dede7a6166/r/2568055c-c1b0-4397-9622-433a3f1ad290?poll=true"
+  ],
+  "remote_feedback_verified": 75,
+  "means": {
+    "f1_score": 0.9327866666666667,
+    "clarity": 0.8613333333333333,
+    "precision": 0.8353333333333333,
+    "helpfulness": 0.8483333333333333,
+    "correctness": 0.88406
+  },
+  "passed_metric_threshold": true
+}

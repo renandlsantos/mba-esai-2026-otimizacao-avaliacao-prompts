@@ -85,6 +85,21 @@ Essas execuções chamam modelos e podem consumir créditos. O dataset acadêmic
 Abra o dashboard, verifique os 15 casos, publique/compartilhe somente evidências adequadas e capture
 pelo menos três traces. Faça entre três e cinco iterações registrando o motivo de cada alteração.
 
+A comparação desta entrega usou `evaluate_langsmith_spark.py`, que faz chamadas reais ao Spark com
+tracing explícito. Para que as versões fiquem lado a lado na aba Experiments, a primeira execução
+cria o dataset e as seguintes reaproveitam o mesmo `--dataset-id`:
+
+```bash
+python src/evaluate_langsmith_spark.py --version v1 --output docs/evidence/.../v1.json
+python src/evaluate_langsmith_spark.py --version v2 --output docs/evidence/.../v2-iter1.json \
+  --dataset-id <id do relatório v1> --prompt-ref renandlsantos/bug_to_user_story_v2:<commit>
+```
+
+O juiz recebe `response_format=json_object`; a geração continua sem restrição de formato, porque é
+ela que está sob medição. O contrato fica gravado em `judge_response_format` no relatório, no
+metadata do experimento, no feedback e no span, e mudá-lo invalida a retomada de checkpoints — notas
+obtidas com contratos diferentes não são somadas.
+
 ## Resultados Finais
 
 **Comparação integral LangSmith pausada e incompleta.** Já existem traces e notas reais; a tabela final só será preenchida após os 15 exemplos de cada versão e conferência remota. A amostra Spark local anterior está documentada separadamente.
@@ -103,9 +118,11 @@ A validação offline não substitui estas notas e o projeto ainda não deve ser
 
 ## Testes e preservação
 
-Os seis testes exigidos estão em `tests/test_prompts.py`. Os testes adicionais cobrem contrato do
-Hub, schema inválido, falha externa sem vazamento, chaves literais, gravação segura, cálculo das
-métricas derivadas e recusa de avaliações incompletas.
+Os seis testes exigidos estão em `tests/test_prompts.py`. A suíte tem 91 testes offline e os
+adicionais cobrem contrato do Hub, schema inválido, falha externa sem vazamento, chaves literais,
+gravação segura, cálculo das métricas derivadas, recusa de avaliações incompletas e o contrato de
+saída do juiz — incluindo a prova de que o modo JSON se aplica somente ao julgamento e de que
+trocá-lo invalida checkpoint.
 
 `src/evaluate.py`, `src/metrics.py`, `src/utils.py` e `datasets/bug_to_user_story.jsonl` permanecem
 idênticos ao upstream, verificados por SHA-256 em [manifesto](docs/upstream-integrity.json).
