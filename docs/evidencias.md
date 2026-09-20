@@ -34,6 +34,14 @@ O smoke inicial antecedeu o campo de hash do runner. Foi arquivado byte a byte a
 
 A publicação do prompt é pública; dataset, projetos e traces não se tornam públicos automaticamente. Resultados brutos ficam ignorados pelo Git. Os artefatos selecionados para a pasta de evidências são revisados para excluir credenciais, metadados de ambiente e `reasoning_content`.
 
+## Contrato de saída do juiz (retomada de 20/09/2026)
+
+A rodada anterior parou no quarto exemplo porque o juiz devolveu JSON inválido. Os prompts congelados de `metrics.py` já exigem "APENAS um objeto JSON válido", então o contrato passou a ser imposto no transporte: o juiz é instanciado com `json_mode=True` e envia `response_format={"type": "json_object"}`. **A geração não foi alterada** — o prompt sob medição continua com o contrato livre, porque restringir o gerador mudaria justamente o objeto do experimento.
+
+Um teste real com o prompt congelado de clareza confirmou resposta válida em 4,35s antes do lote. O contrato ficou registrado em quatro lugares: `judge_response_format` no relatório local, no metadata do experimento, em `source_info` de cada feedback e no span do juiz no LangSmith. Como o metadata entra na comparação de retomada e o hash de `evaluate_spark.py` mudou, os checkpoints anteriores (4/15 com `spark/fast` e 3/15 sem JSON mode) são recusados automaticamente: notas de juízes com contratos diferentes não se misturam.
+
+**Isto não é uma iteração de otimização de prompt.** É correção de transporte do instrumento de medição, como o arredondamento de quatro casas decimais descrito adiante. Commit `4383e1f`; a suíte passou de 86 para 91 testes offline, sendo os cinco novos dedicados a provar que apenas o juiz recebe o contrato e que trocá-lo invalida checkpoint.
+
 ## Precisão de transporte das notas
 
 A API LangSmith rejeitou um feedback com HTTP422 porque a fórmula original produziu `0.9872000000000001` e o endpoint aceita no máximo quatro casas decimais. A correção arredonda somente a nota serializada para a API; o valor bruto permanece no checkpoint e em `source_info.raw_metric_score`. Médias acadêmicas usam os valores brutos. A verificação remota compara a representação de quatro casas. O caso afetado foi recuperado a partir das saídas reais já registradas dos juízes, sem repetir inferência.
