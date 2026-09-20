@@ -212,6 +212,8 @@ quatro iterações documentadas com hipótese, mudança e resultado — incluind
 rejeitaram. Suíte de 91 testes offline; `evaluate.py`, `metrics.py`, `utils.py` e o dataset
 permanecem idênticos ao upstream.
 
-Ressalva mantida: a geração e o julgamento usam o gateway Spark, não o Gemini sugerido no
-enunciado. O desvio está declarado desde a primeira versão deste README e vale para todas as
-versões comparadas, o que preserva a comparação entre elas.
+Sobre os modelos: o enunciado não fixa provedor nem modelo — ele orienta consultar a
+documentação do provedor escolhido e selecionar os modelos adequados, permitindo inclusive o
+mesmo modelo para responder e avaliar. A escolha aqui foi `spark/code` nos dois papéis, a mesma
+em todas as versões comparadas, o que preserva a comparação entre elas. Um teste com outros
+modelos do gateway está registrado nas evidências e ficou abaixo dessa escolha.
