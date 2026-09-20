@@ -106,7 +106,7 @@ def test_import_never_imports_frozen_module():
     assert result.returncode == 0 and "dotenv" not in result.stderr
 
 
-@pytest.mark.parametrize("mutation", ["boolean", "nan", "missing", "duplicate", "too_many", "runner_hash", "judge"])
+@pytest.mark.parametrize("mutation", ["boolean", "nan", "missing", "duplicate", "too_many", "runner_hash", "judge", "judge_format"])
 def test_resume_rejects_invalid_checkpoint(tmp_path, tracing, mutation):
     client = FakeClient()
     path = tmp_path / "report.json"
@@ -120,6 +120,7 @@ def test_resume_rejects_invalid_checkpoint(tmp_path, tracing, mutation):
     elif mutation == "too_many": data["examples"] *= 16
     elif mutation == "runner_hash": data["metadata"]["runner_sha256"] = "different"
     elif mutation == "judge": data["metadata"]["judge"] = "spark/fast"
+    elif mutation == "judge_format": data["metadata"]["judge_response_format"] = "json_object"
     path.write_text(json.dumps(data))
     with pytest.raises(runner.EvaluationError):
         runner.run_experiment(client, FakeModel(), FakeModel(), resume=True, **args)
@@ -182,3 +183,18 @@ def test_cli_defaults_to_same_author_selected_spark_model(monkeypatch, tmp_path)
         return {"complete": False, "dashboard_url": "https://test.invalid/report"}
     monkeypatch.setattr(runner, "run_experiment", execute)
     assert runner.main() == 0
+
+
+class JsonFakeModel(FakeModel):
+    json_mode = True
+
+
+def test_judge_contract_recorded_in_metadata_feedback_and_spans(tmp_path, tracing):
+    client = FakeClient()
+    report = runner.run_experiment(client, FakeModel(), JsonFakeModel(), version="v2",
+                                   output=tmp_path / "report.json", base_project="test", limit=1)
+    assert report["metadata"]["judge_response_format"] == "json_object"
+    formats = {name: kwargs["metadata"].get("response_format")
+               for name, kwargs in tracing if name.startswith(("generation:", "judge:"))}
+    assert formats == {"generation:test-only": "text", "judge:test-only": "json_object"}
+    assert all(item.score is not None for item in client.feedback[report["examples"][0]["run_id"]])

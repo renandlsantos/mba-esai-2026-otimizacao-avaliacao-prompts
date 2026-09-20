@@ -13,7 +13,7 @@ from langsmith import Client, trace, tracing_context
 from openai import OpenAI
 import yaml
 
-from evaluate_spark import EvaluationError, ROOT, SparkModel, score_answer
+from evaluate_spark import EvaluationError, ROOT, SparkModel, judge_response_format, score_answer
 
 METRICS = ("f1_score", "clarity", "precision", "helpfulness", "correctness")
 V1_REF = "leonanluppi/bug_to_user_story_v1:2950c33dbd7ffaed2e440b50adfd7769d183f90faf0bae5aa4864354f88e4073"
@@ -28,6 +28,7 @@ class TracedSparkModel:
     def __init__(self, model, client, purpose):
         self.delegate, self.client, self.purpose = model, client, purpose
         self.model = model.model
+        self.response_format = judge_response_format(model)
 
     def invoke(self, messages):
         inputs = {"messages": [{"role": "system" if m.type == "system" else "user",
@@ -35,7 +36,8 @@ class TracedSparkModel:
         with trace(f"{self.purpose}:{self.model}", run_type="llm", inputs=inputs,
                    client=self.client, metadata={"ls_provider": "openai",
                    "ls_model_name": self.model, "ls_temperature": 0,
-                   "provider_deployment": "Spark", "max_tokens": 4096}) as span:
+                   "provider_deployment": "Spark", "max_tokens": 4096,
+                   "response_format": self.response_format}) as span:
             answer = self.delegate.invoke(messages)
             span.end(outputs={"choices": [{"message": {"role": "assistant", "content": answer.content}}]})
             return answer
@@ -101,7 +103,8 @@ def run_experiment(client, generator, judge, *, version, output, base_project,
                         ROOT / "src/evaluate_spark.py"]}
     metadata = {"runner_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                 "version": version, "hashes": hashes, "generator": generator.model,
-                "judge": judge.model, "temperature": 0, "max_tokens": 4096,
+                "judge": judge.model, "judge_response_format": judge_response_format(judge),
+                "temperature": 0, "max_tokens": 4096,
                 "timeout_seconds": 300, "concurrency": 1, "base_project": base_project,
                 **verify_hub(client, prompt_ref, prompt, cases)}
     if resume:
@@ -210,7 +213,9 @@ def run_experiment(client, generator, judge, *, version, output, base_project,
                 span.end(outputs={"answer": answer})
             for key, value in scores.items():
                 client.create_feedback(span.id, key, score=round(value, 4), feedback_source_type="model",
-                                       source_info={"judge": judge.model, "frozen_metric": True, "raw_metric_score": value})
+                                       source_info={"judge": judge.model, "frozen_metric": True,
+                                                    "judge_response_format": metadata["judge_response_format"],
+                                                    "raw_metric_score": value})
             report["examples"].append({"index": index, "example_id": report["example_ids"][index - 1],
                                        "run_id": str(span.id), "answer": answer, "scores": scores})
             write_report(output, report)
@@ -245,7 +250,8 @@ def main():
         client = Client(api_url=ls["LANGSMITH_ENDPOINT"], api_key=ls["LANGSMITH_API_KEY"], auto_batch_tracing=False)
         provider = OpenAI(base_url=spark.get("SPARK_BASE_URL") or spark["OPENAI_BASE_URL"],
                           api_key=spark.get("SPARK_API_KEY") or spark["OPENAI_API_KEY"], timeout=300, max_retries=0)
-        report = run_experiment(client, SparkModel(provider, "spark/code"), SparkModel(provider, "spark/code"),
+        report = run_experiment(client, SparkModel(provider, "spark/code"),
+                                SparkModel(provider, "spark/code", json_mode=True),
                                 version=args.version, output=args.output, base_project=ls["LANGSMITH_PROJECT"],
                                 prompt_ref=args.prompt_ref or (V1_REF if args.version == "v1" else None),
                                 limit=args.limit, resume=args.resume, dataset_id=args.dataset_id, adopt_legacy=args.adopt_legacy_checkpoint, adopt_upgrade=args.adopt_runner_upgrade)

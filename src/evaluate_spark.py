@@ -22,18 +22,22 @@ class EvaluationError(RuntimeError):
 
 
 class SparkModel:
-    def __init__(self, client, model):
+    def __init__(self, client, model, json_mode=False):
         if model not in {"spark/code", "spark/fast"}:
             raise EvaluationError("Modelo Spark não permitido.")
-        self.client, self.model = client, model
+        self.client, self.model, self.json_mode = client, model, json_mode
 
     def invoke(self, messages):
         wire = [{"role": "system" if m.type == "system" else "user", "content": m.content}
                 for m in messages]
+        # Judge-only structured output: the frozen evaluator prompts already require a
+        # JSON object, so constraining the response format removes malformed judgments
+        # without changing the generation being measured.
+        options = {"response_format": {"type": "json_object"}} if self.json_mode else {}
         try:
             response = self.client.chat.completions.create(
                 model=self.model, messages=wire, temperature=0, max_tokens=4096,
-                timeout=300)
+                timeout=300, **options)
             choice = response.choices[0]
             content = choice.message.content
             if choice.finish_reason != "stop" or not isinstance(content, str) or not content.strip():
@@ -57,6 +61,11 @@ def frozen_functions(judge):
         functions = [node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name in wanted and (filename == "metrics.py" or node.name == "parse_judgment")]
         exec(compile(ast.Module(body=functions, type_ignores=[]), filename, "exec"), namespace)
     return namespace
+
+
+def judge_response_format(judge):
+    """Record the judge output contract; it belongs to the measuring instrument."""
+    return "json_object" if getattr(judge, "json_mode", False) else "text"
 
 
 def score_answer(judge, question, answer, reference):
@@ -95,7 +104,8 @@ def evaluate_version(version, generator, judge, output, limit=15, resume=False):
     if output.exists() and not resume:
         raise EvaluationError("Destino já existe; use --resume com configuração idêntica.")
     report = {"provider": "Spark local", "version": version, "generator": generator.model,
-              "judge": judge.model, "concurrency": 1, "temperature": 0, "max_tokens": 4096,
+              "judge": judge.model, "judge_response_format": judge_response_format(judge),
+              "concurrency": 1, "temperature": 0, "max_tokens": 4096,
               "timeout_seconds": 300, "langsmith_acceptance": False,
               "hashes": {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
                          for p in [prompt_path, dataset_path, ROOT / "src/metrics.py"]},
@@ -168,7 +178,8 @@ def main():
             raise EvaluationError("Configuração Spark ausente.")
         client = OpenAI(base_url=base, api_key=key, timeout=300, max_retries=0)
         result = evaluate_version(args.version, SparkModel(client, "spark/code"),
-                                  SparkModel(client, args.judge), args.output, args.limit, args.resume)
+                                  SparkModel(client, args.judge, json_mode=True), args.output,
+                                  args.limit, args.resume)
         print(json.dumps({"means": result.get("means"), "complete": result["complete"], "langsmith_acceptance": False}))
         return 1 if result["complete"] and not result["passed_local_threshold"] else 0
     except Exception:

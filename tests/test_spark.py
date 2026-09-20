@@ -125,3 +125,36 @@ def test_main_exit_code_and_no_credential_interpolation(monkeypatch, tmp_path, c
         return {"complete": complete, "passed_local_threshold": passed}
     monkeypatch.setattr(spark, "evaluate_version", evaluate)
     assert spark.main() == expected
+
+
+class JsonFake(Fake):
+    json_mode = True
+
+
+def test_json_mode_constrains_judge_only():
+    calls = []
+    def create(**kwargs):
+        calls.append(kwargs)
+        return SimpleNamespace(choices=[SimpleNamespace(finish_reason="stop",
+                               message=SimpleNamespace(content='{"score": 1, "reasoning": "ok"}'))])
+    client = SimpleNamespace(chat=SimpleNamespace(completions=SimpleNamespace(create=create)))
+    spark.SparkModel(client, "spark/code").invoke([])
+    spark.SparkModel(client, "spark/code", json_mode=True).invoke([])
+    assert "response_format" not in calls[0]
+    assert calls[1]["response_format"] == {"type": "json_object"}
+    assert calls[0]["temperature"] == calls[1]["temperature"] == 0
+
+
+def test_resume_rejects_judge_contract_change(tmp_path):
+    path = tmp_path / "partial.json"
+    partial = spark.evaluate_version("v1", Fake(), Fake(), path, limit=1)
+    assert partial["judge_response_format"] == "text"
+    with pytest.raises(spark.EvaluationError, match="incompatível"):
+        spark.evaluate_version("v1", Fake(), JsonFake(), path, resume=True)
+    assert json.loads(path.read_text())["examples"] == partial["examples"]
+
+
+def test_json_mode_report_declares_contract(tmp_path):
+    report = spark.evaluate_version("v1", Fake(), JsonFake(), tmp_path / "json.json", limit=1)
+    assert report["judge_response_format"] == "json_object"
+    assert report["generator"] == report["judge"] == "test-only"
