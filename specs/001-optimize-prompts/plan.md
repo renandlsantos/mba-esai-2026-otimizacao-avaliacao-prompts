@@ -35,3 +35,6 @@ Sem exceções constitucionais. Avaliação comparativa auxiliar será documenta
 
 ## Runner complementar Spark
 OpenAI client direto, timeout de 300 s, 4096 tokens, concorrência 1, gerador spark/code e juiz spark/fast. Reutilizar funções congeladas com globals privados, parser estrito e erros redigidos. Checkpoint atômico por exemplo; relatório completo apenas após 15 exemplos. Sem nova dependência.
+
+## Execução rastreada
+Runner complementar src/evaluate_langsmith_spark.py compõe SparkModel e reutiliza score_answer sem duplicar fórmulas. Configuração explícita sem dotenv ancestral. Experimentos possuem dataset próprio de15 exemplos e checkpoints; retomada valida hashes/configuração/dataset remoto. SDK trace instrumenta geração e três julgamentos reais, sem raw reasoning_content. API confirma feedbacks e três árvores de trace completas antes da conclusão.

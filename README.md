@@ -1,9 +1,12 @@
 # MBA ESAI 2026 — Otimização e avaliação de prompts
 
+**Preferência do autor:** modelos locais no Spark. Geração com `spark/code` e avaliação com `spark/fast`. LangSmith está conectado para registrar experimentos, feedbacks e traces reais.
+
+
 Implementação da fase 294 do MBA Full Cycle, baseada no [repositório acadêmico](https://github.com/devfullcycle/mba-ia-pull-evaluation-prompt).
 Transforma relatos de bugs em User Stories, versiona prompts no LangSmith e avalia cinco métricas.
 
-**Estado: código e testes locais implementados; avaliação real e aprovação acadêmica pendentes.**
+**Estado: código implementado, Hub v2 público e avaliação integral Spark + LangSmith em execução; aprovação acadêmica ainda não declarada.**
 Nenhuma nota, publicação no LangSmith ou screenshot de avaliação foi fabricada.
 
 ## Processo SDD
@@ -84,7 +87,7 @@ pelo menos três traces. Faça entre três e cinco iterações registrando o mot
 
 ## Resultados Finais
 
-**Resultados acadêmicos LangSmith ainda não medidos.** A execução complementar Spark, com credencial explicitamente autorizada, é documentada separadamente abaixo.
+**Comparação integral LangSmith em execução.** Já existem traces e notas reais; a tabela final só será preenchida após os 15 exemplos de cada versão e conferência remota. A amostra Spark local anterior está documentada separadamente.
 
 | Métrica | v1 | v2 | Critério |
 |---|---|---|---|
@@ -95,7 +98,7 @@ pelo menos três traces. Faça entre três e cinco iterações registrando o mot
 | Precision | Não medido | Não medido | ≥ 0,8 |
 | Média | Não medida | Não medida | ≥ 0,8, sem compensar métrica insuficiente |
 
-Dashboard público e screenshots: ainda não disponíveis. [Roteiro de evidências e iterações](docs/evidencias.md).
+Os experimentos e traces autenticados já estão disponíveis. Veja [evidências exportadas](docs/evidence/langsmith/README.md) e [roteiro de evidências e iterações](docs/evidencias.md). Capturas parciais não equivalem à avaliação final; links autenticados não são apresentados como públicos.
 A validação offline não substitui estas notas e o projeto ainda não deve ser submetido como aprovado.
 
 ## Testes e preservação
@@ -137,4 +140,11 @@ O caminho de credenciais pode ser alterado explicitamente com `--credentials /ca
 
 ### Amostra real de 20/09/2026
 
-Foram executados 3 de 15 exemplos por versão, com `spark/code` e juiz `spark/fast`; os seis casos tiveram JSON válido nas três métricas. A comparação continua incompleta, sem média nem aprovação. Veja [notas por exemplo e limites da evidência](docs/spark-sample-2026-09-20.md). Suíte atual: 69 testes offline, incluindo clone limpo.
+Foram executados 3 de 15 exemplos por versão, com `spark/code` e juiz `spark/fast`; os seis casos tiveram JSON válido nas três métricas. A comparação continua incompleta, sem média nem aprovação. Veja [notas por exemplo e limites da evidência](docs/spark-sample-2026-09-20.md). Suíte naquela etapa: 69 testes offline, incluindo clone limpo.
+
+
+[Configuração e execução LangSmith mantendo modelos Spark](docs/configurar-langsmith.md).
+
+## Integração real Spark + LangSmith
+
+O runner `src/evaluate_langsmith_spark.py` cria experimentos com o dataset congelado, traces reais da geração e dos três julgamentos e cinco feedbacks por exemplo. Reutiliza `score_answer`, verifica os resultados remotos e suporta retomada estrita. A [documentação de execução](docs/configurar-langsmith.md) explica os arquivos de configuração, o dataset compartilhado e os links: os experimentos ficam separados do projeto-base `MBA-ESAI`. O prompt v2 já está público no handle `renandlsantos`, commit `332d800a16061a89ba3c9f897c3b7ef353aca9822efd77a179f2098f0f88ed56`.

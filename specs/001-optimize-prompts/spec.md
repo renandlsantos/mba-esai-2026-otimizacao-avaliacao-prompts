@@ -59,3 +59,6 @@ O titular configura credenciais e escolhe modelos disponíveis. Não há autoriz
 
 ## Complemento local Spark (2026-09-20)
 Executar 15 exemplos por versão v1/v2 com Spark explícito; preservar prompts e fórmulas congelados. Não substitui LangSmith. Falhas não recebem notas sintéticas; nenhum segredo ou reasoning_content persiste.
+
+## Integração real LangSmith + Spark
+Criar experimento ligado ao dataset original de15 casos, com traces reais da geração e dos três julgamentos e cinco feedbacks por caso. Fixar commit Hub quando disponível e verificar equivalência com YAML. Nenhuma aprovação antes de verificar os resultados remotos. Publicação Hubv2 depende de owner confirmado.

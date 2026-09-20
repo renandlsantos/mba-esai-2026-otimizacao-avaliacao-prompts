@@ -53,3 +53,9 @@ Convergência após T015: achado R294-01 resolvido e revisado independentemente;
 - [x] T017 Testar isolamento, fórmulas, falhas e checkpoint em tests/test_spark.py.
 - [ ] T018 Executar baseline real v1/v2 (15 cada) e registrar evidências locais, mantendo T010/T014 pendentes de LangSmith.
 - [x] T019 Executar amostra real de 3 exemplos por versão, preservar checkpoints e documentar limites em docs/spark-sample-2026-09-20.md. T018 permanece pendente.
+
+## Fase10 — LangSmith real com Spark
+- [x] T020 Implementar src/evaluate_langsmith_spark.py e testes offline sem modificar arquivos congelados.
+- [ ] T021 Executar smoke real e avaliação completa v1/v2 (15cada), verificar75feedbacks e três traces por experimento.
+- [x] T022 Publicar v2 no Hub somente com handle confirmado; registrar commit e equivalência do snapshot.
+- [ ] T023 Documentar resultados reais, links e requisitos acadêmicos ainda pendentes, sem fabricar3–5iterações.
