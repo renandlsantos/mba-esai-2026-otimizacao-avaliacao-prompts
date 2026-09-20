@@ -21,9 +21,18 @@ class EvaluationError(RuntimeError):
     """Safe error without provider request, credentials or raw response."""
 
 
+# Models the gateway exposes. The allow list stays explicit so a typo fails loudly
+# instead of silently evaluating a different model than the report claims.
+ALLOWED_MODELS = frozenset({
+    "spark/fast", "spark/code", "spark/reason", "spark/agent", "spark/small",
+    "spark/mistral", "spark/glm", "spark/deepseek", "spark/minimax", "spark/step",
+    "spark/qwen4", "spark/best", "cloud/nemotron-ultra",
+})
+
+
 class SparkModel:
     def __init__(self, client, model, json_mode=False):
-        if model not in {"spark/code", "spark/fast"}:
+        if model not in ALLOWED_MODELS:
             raise EvaluationError("Modelo Spark não permitido.")
         self.client, self.model, self.json_mode = client, model, json_mode
 
