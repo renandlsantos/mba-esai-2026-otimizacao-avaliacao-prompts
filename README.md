@@ -134,3 +134,7 @@ Esta comparação é local e exploratória: não cria experimentos, dashboard ou
 Para uma amostra curta, use `--limit 3`. Retome no mesmo arquivo com `--resume` (e opcionalmente novo `--limit`); configuração e hashes devem coincidir. Só exemplos integralmente avaliados são reutilizados. Amostras menores que 15 exemplos não recebem médias nem aprovação. Criar um arquivo `.stop` ao lado do relatório (mesmo nome-base) pausa antes do próximo exemplo; remova-o antes de retomar.
 
 O caminho de credenciais pode ser alterado explicitamente com `--credentials /caminho/spark-api.env`. A retomada requer a mesma versão do runner e do parser estrito além dos hashes registrados. Uma avaliação completa abaixo do limiar retorna exit code 1; uma amostra parcial retorna 0 com `complete:false`, sem aprovação.
+
+### Amostra real de 20/09/2026
+
+Foram executados 3 de 15 exemplos por versão, com `spark/code` e juiz `spark/fast`; os seis casos tiveram JSON válido nas três métricas. A comparação continua incompleta, sem média nem aprovação. Veja [notas por exemplo e limites da evidência](docs/spark-sample-2026-09-20.md). Suíte atual: 69 testes offline, incluindo clone limpo.

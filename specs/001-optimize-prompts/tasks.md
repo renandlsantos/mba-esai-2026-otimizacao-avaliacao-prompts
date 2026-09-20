@@ -52,3 +52,4 @@ Convergência após T015: achado R294-01 resolvido e revisado independentemente;
 - [x] T016 Implementar src/evaluate_spark.py preservando arquivos protegidos e redigindo erros.
 - [x] T017 Testar isolamento, fórmulas, falhas e checkpoint em tests/test_spark.py.
 - [ ] T018 Executar baseline real v1/v2 (15 cada) e registrar evidências locais, mantendo T010/T014 pendentes de LangSmith.
+- [x] T019 Executar amostra real de 3 exemplos por versão, preservar checkpoints e documentar limites em docs/spark-sample-2026-09-20.md. T018 permanece pendente.
