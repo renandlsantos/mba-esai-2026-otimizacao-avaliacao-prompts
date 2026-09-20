@@ -6,7 +6,7 @@
 Implementação da fase 294 do MBA Full Cycle, baseada no [repositório acadêmico](https://github.com/devfullcycle/mba-ia-pull-evaluation-prompt).
 Transforma relatos de bugs em User Stories, versiona prompts no LangSmith e avalia cinco métricas.
 
-**Estado: código implementado, Hub v2 público e avaliação integral Spark + LangSmith pausada por solicitação do autor; fase 294 pendente, sem merge ou submissão.**
+**Estado: avaliação integral concluída. Cinco comparações completas de 15 exemplos sobre o mesmo dataset e o mesmo juiz, prompt v2 público no Hub, dataset e experimentos com acesso anônimo verificado, e as cinco métricas da versão entregue acima de 0,8.**
 Nenhuma nota, publicação no LangSmith ou screenshot de avaliação foi fabricada.
 
 ## Processo SDD
@@ -102,19 +102,44 @@ obtidas com contratos diferentes não são somadas.
 
 ## Resultados Finais
 
-**Comparação integral LangSmith pausada e incompleta.** Já existem traces e notas reais; a tabela final só será preenchida após os 15 exemplos de cada versão e conferência remota. A amostra Spark local anterior está documentada separadamente.
+Cinco avaliações completas de 15 exemplos cada, **todas sobre o mesmo dataset e o mesmo juiz**
+(`spark/code` gerando e julgando, com contrato JSON apenas no julgamento). São 300 chamadas
+reais, com os cinco feedbacks de cada exemplo conferidos remotamente.
 
-| Métrica | v1 | v2 | Critério |
-|---|---|---|---|
-| Helpfulness | Não medido | Não medido | ≥ 0,8 |
-| Correctness | Não medido | Não medido | ≥ 0,8 |
-| F1-Score | Não medido | Não medido | ≥ 0,8 |
-| Clarity | Não medido | Não medido | ≥ 0,8 |
-| Precision | Não medido | Não medido | ≥ 0,8 |
-| Média | Não medida | Não medida | ≥ 0,8, sem compensar métrica insuficiente |
+| Métrica | v1 (baseline) | **v2 entregue** | v2 iter. 2 | v2 iter. 3 | v2 iter. 4 | Critério |
+|---|---|---|---|---|---|---|
+| Helpfulness | 0.899 | 0.880 | 0.867 | 0.710 | 0.848 | ≥ 0,80 |
+| Correctness | 0.926 | 0.903 | 0.887 | 0.686 | 0.884 | ≥ 0,80 |
+| F1-Score | 0.948 | 0.939 | 0.903 | 0.688 | 0.933 | ≥ 0,80 |
+| Clarity | 0.895 | 0.895 | 0.863 | 0.737 | 0.861 | ≥ 0,80 |
+| Precision | 0.904 | 0.866 | 0.871 | 0.683 | 0.835 | ≥ 0,80 |
+| **Média das cinco** | 0.914 | 0.897 | 0.878 | 0.701 | 0.872 | ≥ 0,80 |
 
-Os experimentos e traces autenticados já estão disponíveis. Veja [evidências exportadas](docs/evidence/langsmith/README.md) e [roteiro de evidências e iterações](docs/evidencias.md). Capturas parciais não equivalem à avaliação final; links autenticados não são apresentados como públicos.
-A validação offline não substitui estas notas e o projeto ainda não deve ser submetido como aprovado.
+A versão entregue é a da iteração 1, com **as cinco métricas acima de 0,8**. As iterações 2, 3
+e 4 testaram hipóteses de melhoria que os dados rejeitaram; a jornada completa, com a análise
+que motivou cada uma, está em
+[evidências da rodada](docs/evidence/langsmith/run-2026-09-20-json-judge/README.md).
+
+A baseline v1 mantém a melhor média. O relatório não a esconde: a referência do dataset
+extrapola o relato por convenção, e o v1 extrapola livremente porque quase não impõe regras.
+As restrições que tornam o v2 mais defensável para uso real custam similaridade com essa
+referência.
+
+### Links públicos
+
+- [Dataset e experimentos](https://smith.langchain.com/public/ad473fb9-1502-47c5-995c-b5b72c5d2bc2/d) —
+  acesso anônimo confirmado por requisição sem credencial: HTTP 200, 15 exemplos e 5 sessões
+  ([verificação](docs/evidence/langsmith/run-2026-09-20-json-judge/dataset-publico.json)).
+- [Prompt v2 no Hub](https://smith.langchain.com/hub/renandlsantos/bug_to_user_story_v2), público,
+  com o histórico das quatro iterações. A versão entregue confere byte a byte com
+  `prompts/bug_to_user_story_v2.yml` (SHA-256 `f0bcddb0…`), verificado antes da avaliação.
+- Três traces detalhados, cada um com a geração, os três julgamentos e as cinco notas:
+  [01](docs/evidence/langsmith/run-2026-09-20-json-judge/trace-v2-01.json) ·
+  [02](docs/evidence/langsmith/run-2026-09-20-json-judge/trace-v2-02.json) ·
+  [03](docs/evidence/langsmith/run-2026-09-20-json-judge/trace-v2-03.json).
+
+Estes números são de execuções reais e não constituem aprovação acadêmica; a avaliação é da
+instituição.
 
 ## Testes e preservação
 
@@ -175,6 +200,18 @@ O runner `src/evaluate_langsmith_spark.py` cria experimentos com o dataset conge
 
 Temperatura 0 não garante determinismo absoluto, e o limite de 4096 tokens ainda permite respostas truncadas, que o runner rejeita. Usar o mesmo modelo como gerador e juiz pode introduzir preferência pelas próprias respostas; não houve calibração humana do juiz. A escolha `spark/code` em ambos os papéis é explícita do autor.
 
-## Pausa e entrega pendente
+## Estado da entrega
 
-A pedido do autor, a fase 294 fica pendente enquanto os demais projetos são submetidos. Foram preservados 4/15 casos v1 com juiz `spark/fast` e, em um experimento separado, 3/15 com juiz `spark/code`. O quarto caso do novo grupo foi rejeitado por JSON inválido; v2 integral ainda não foi executada. O teste pontual de JSON mode passou, mas essa opção ainda não foi implementada nos runners. Veja [estado, evidências e retomada](docs/evidence/langsmith/status-pendente-2026-09-20.md). Suíte atual: 86 testes offline.
+A pausa de 20/09/2026 foi encerrada. O julgamento passou a usar contrato JSON, o que eliminou
+a rejeição que interrompia as avaliações, e as cinco comparações completas foram executadas
+sobre o mesmo dataset e o mesmo juiz.
+
+Entregue: prompt v2 público no Hub, dataset e experimentos com acesso anônimo verificado,
+cinco métricas acima de 0,8 na versão entregue, tabela comparativa, três traces detalhados e
+quatro iterações documentadas com hipótese, mudança e resultado — incluindo as que os dados
+rejeitaram. Suíte de 91 testes offline; `evaluate.py`, `metrics.py`, `utils.py` e o dataset
+permanecem idênticos ao upstream.
+
+Ressalva mantida: a geração e o julgamento usam o gateway Spark, não o Gemini sugerido no
+enunciado. O desvio está declarado desde a primeira versão deste README e vale para todas as
+versões comparadas, o que preserva a comparação entre elas.

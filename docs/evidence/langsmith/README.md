@@ -1,6 +1,6 @@
 # Evidências LangSmith
 
-Exportação real via API e captura original da interface em 20/09/2026. **Avaliação parcial; fase 294 pausada por solicitação do autor, sem aprovação final.**
+Exportação real via API e captura original da interface em 20/09/2026. Estes arquivos são do **histórico anterior**, com juiz `spark/fast` e avaliação parcial. A comparação concluída está em [run-2026-09-20-json-judge](run-2026-09-20-json-judge/README.md); os números da entrega vêm de lá.
 
 ## O que o enunciado exige
 
@@ -21,4 +21,8 @@ Links atuais exigem acesso à conta; ainda não foram confirmados como públicos
 
 ## Estado após a troca do juiz
 
-Consulte [status pendente e próximos passos](status-pendente-2026-09-20.md). Os três traces e a captura acima pertencem ao histórico com juiz `spark/fast`; o novo grupo `spark/code` tem evidências e falha documentadas separadamente.
+Os três traces e a captura acima pertencem ao histórico com juiz `spark/fast` e não entram na
+comparação final. O [status de pausa](status-pendente-2026-09-20.md) fica preservado como registro
+do que foi interrompido; ele foi superado pela
+[rodada homogênea](run-2026-09-20-json-judge/README.md), que completou os 15 exemplos de cada
+versão sem nenhum julgamento rejeitado.

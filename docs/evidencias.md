@@ -6,7 +6,7 @@ O prompt v1 foi consultado no Hub e seu commit `2950c33dbd7ffaed2e440b50adfd7769
 
 A amostra local anterior (3 casos por versão) não tinha LangSmith. A rodada atual usa **chamadas reais Spark com traces e feedbacks reais no LangSmith**. Os experimentos estão separados do projeto-base `MBA-ESAI`; o dataset contém os 15 exemplos originais. Os links e a configuração estão em [configurar-langsmith.md](configurar-langsmith.md).
 
-A avaliação integral está pausada a pedido do autor; a fase 294 não será submetida nesta rodada. O material já exportado fica em [evidence/langsmith/README.md](evidence/langsmith/README.md). Arquivos JSON não substituem automaticamente os screenshots solicitados no enunciado; capturas parciais precisam estar identificadas como parciais.
+A avaliação integral foi concluída em 20/09/2026, depois que o contrato JSON no juiz eliminou as rejeições de julgamento. Cinco comparações completas de 15 exemplos estão em [run-2026-09-20-json-judge](evidence/langsmith/README.md). O material anterior, parcial e com outro juiz, segue identificado como histórico.
 
 ## Critérios da entrega
 
@@ -19,12 +19,15 @@ A avaliação integral está pausada a pedido do autor; a fase 294 não será su
 
 ## Registro atual
 
-| Etapa | Mudança | Validação | Alcance |
+| Etapa | Mudança | Validação | Resultado |
 |---|---|---|---|
-| Construção v2 | Few-shot, persona, estrutura Markdown e regras de lacunas | Testes de contrato e conteúdo | Implementação do prompt |
-| Amostra Spark local | Nenhuma alteração adicional | 3 casos por versão, sem LangSmith | Exploratória, incompleta |
-| Hub e smoke LangSmith | Publicação v2 e instrumentação real | Snapshot do Hub, geração, 3 julgamentos e 5 feedbacks confirmados | Valida integração, não constitui aprovação acadêmica |
-| Comparação integral | Mesmos prompts e modelos | Pausada, sem completar os 15 exemplos | Resultados finais serão registrados somente após conferência remota |
+| Construção v2 (iteração 1) | Few-shot, persona, estrutura Markdown e regras de lacunas | 15 exemplos no LangSmith | 0,897 — versão entregue, cinco métricas acima de 0,8 |
+| Iteração 2 | Critérios ancorados no relato, dúvidas restritas, contexto em uma frase | 15 exemplos | 0,878 — hipótese rejeitada |
+| Iteração 3 | Formato da referência, sem seções extras | 15 exemplos | 0,701 — hipótese rejeitada; perdeu a regra de múltiplos defeitos e recusou três relatos |
+| Iteração 4 | Cobertura ampliada sobre a iteração 1 | 15 exemplos | 0,872 — hipótese rejeitada |
+| Troca do gerador | `spark/best`, `spark/reason` e `spark/glm` no lugar de `spark/code` | 2 casos difíceis, mesmo juiz | Abaixo da baseline; nenhuma métrica da entrega vem daqui |
+
+Detalhamento de cada hipótese em [evidências da rodada](evidence/langsmith/run-2026-09-20-json-judge/README.md).
 
 ## Integridade e retomada
 

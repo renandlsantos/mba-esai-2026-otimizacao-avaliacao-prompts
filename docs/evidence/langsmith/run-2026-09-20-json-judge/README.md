@@ -69,3 +69,75 @@ filtros, ordenação, exportação, relatório e permissão quando o relato não
 role-prompting preservados, com os exemplos reescritos no formato novo.
 
 **Resultado:** melhor que as iterações 1 e 2 em precision, helpfulness e correctness.
+
+**Resultado:** pior de todas, 0,701 de média, com três casos zerados. Ao reescrever o YAML
+do zero em vez de editá-lo, a regra para relatos com mais de um defeito independente se
+perdeu. Os exemplos 13, 14 e 15 trazem vários defeitos por relato, e o exemplo 13 ainda
+contém um payload `<script>alert('xss')</script>` como evidência do bug. Sem aquela regra, e
+com o terceiro exemplo few-shot ensinando a recusar entradas adversariais, o modelo recusou
+os três. **Hipótese rejeitada.**
+
+Mesmo desconsiderando os três casos recusados, a iteração 3 perde para o v1 em todas as
+métricas nos doze restantes (0,839 contra 0,908). O problema não foi apenas a recusa.
+
+### Iteração 4 — cobertura sobre a melhor versão
+
+**Hipótese:** o v1 vence sobretudo no f1_score, que carrega o recall. Se a iteração 1 receber
+mais cobertura por critério, o recall sobe sem desmontar o que já funciona.
+
+**Mudança:** a partir da iteração 1, não da 3. O que cabe como critério deixa de virar
+dúvida, a convenção de domínio passa a ser explicitamente permitida e cada história passa a
+ter de cinco a sete critérios.
+
+**Resultado:** 0,872 — acima das iterações 2 e 3, ainda abaixo da iteração 1. **Hipótese
+rejeitada.**
+
+### Teste complementar — trocar o modelo gerador
+
+O gateway expõe dezoito modelos. Com o mesmo prompt e o mesmo juiz, `spark/best` ficou abaixo
+de `spark/code` nos dois casos mais difíceis (0,699 contra 0,735 no exemplo 4; 0,872 contra
+0,907 no exemplo 13) e `spark/glm` não completou a avaliação. `spark/best` e `spark/reason`
+devolveram saídas de tamanho e nota idênticos com temperatura 0, indício de que o gateway os
+encaminha para o mesmo destino — a consulta direta que confirmaria isso não foi conclusiva.
+Trocar o gerador não melhorou o resultado e **nenhuma métrica da entrega vem desse teste**.
+
+## Resultado consolidado
+
+| Métrica | v1 (baseline) | v2 iter. 1 | v2 iter. 2 | v2 iter. 3 | v2 iter. 4 | Critério |
+|---|---|---|---|---|---|---|
+| Helpfulness | 0.899 | 0.880 | 0.867 | 0.710 | 0.848 | ≥ 0,80 |
+| Correctness | 0.926 | 0.903 | 0.887 | 0.686 | 0.884 | ≥ 0,80 |
+| F1-Score | 0.948 | 0.939 | 0.903 | 0.688 | 0.933 | ≥ 0,80 |
+| Clarity | 0.895 | 0.895 | 0.863 | 0.737 | 0.861 | ≥ 0,80 |
+| Precision | 0.904 | 0.866 | 0.871 | 0.683 | 0.835 | ≥ 0,80 |
+| **Média das cinco** | **0.914** | **0.897** | **0.878** | **0.701** | **0.872** | ≥ 0,80 |
+
+Quatro hipóteses foram testadas contra o mesmo dataset e o mesmo juiz. Nenhuma superou o
+prompt da iteração 1, que é a versão entregue: **todas as cinco métricas acima de 0,8**.
+
+A baseline v1 permanece com a melhor média. Registrar isso é mais útil do que escondê-lo: o
+juiz compara a resposta com uma referência que extrapola o relato por convenção, e o v1
+extrapola com liberdade porque quase não tem regras. As restrições que tornam o v2 mais
+defensável para uso real — não inventar causa raiz, separar dúvidas, recusar injeção de
+instruções — custam similaridade com essa referência específica.
+
+## Capturas da interface
+
+![Comparação dos cinco experimentos](comparacao-cinco-experimentos.jpg)
+
+Os cinco experimentos sobre o mesmo dataset, cada um com 15 execuções e as médias das cinco
+métricas: #1 é o v1, #2 a iteração 1 entregue, #3 a iteração 2, #4 a iteração 3 e #5 a
+iteração 4. Os valores conferem com a tabela acima.
+
+![Trace detalhado do primeiro exemplo](trace-v2-01-detalhe.jpg)
+
+Um exemplo aberto: a árvore mostra a geração e os três julgamentos reais, e o painel traz os
+cinco feedbacks daquele caso, a entrada e a saída. As capturas excluem a barra lateral, que
+exibe dados da conta.
+
+## Limites desta rodada
+
+Os arquivos `.log` das execuções não são versionados (`*.log` está no `.gitignore`); o
+progresso verificável está nos relatórios JSON. Os números acima são de execuções reais com
+feedback conferido remotamente, mas não constituem aprovação acadêmica: a avaliação é da
+instituição.
